@@ -1,7 +1,7 @@
 import * as os from "os";
 
 export default class Metadata {
-  version = "2.0.3";
+  version = "2.0.4";
 
   identifier(application: string, language: any): string {
     return JSON.stringify({

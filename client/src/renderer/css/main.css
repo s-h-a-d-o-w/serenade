@@ -72,12 +72,12 @@ input[type="number"]::-webkit-outer-spin-button {
   opacity: 1;
 }
 
-*::-webkit-scrollbar-track,
+/* *::-webkit-scrollbar-track,
 *::-webkit-scrollbar,
 *::-webkit-scrollbar-thumb {
   height: 6px;
   width: 6px;
-}
+} */
 
 *::-webkit-scrollbar-track {
   background: #e2e8f0;
