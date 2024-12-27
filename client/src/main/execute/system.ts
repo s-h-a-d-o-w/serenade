@@ -51,7 +51,6 @@ export default class System {
 
   async determineActiveApplication() {
     const result = (await driver.getActiveApplication()).toLowerCase();
-    console.log("determineActiveApplication: " + result)
     if (result === "system dialog") {
       return "system dialog";
     } else if (result.includes("atom")) {
