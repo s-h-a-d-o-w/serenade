@@ -37,19 +37,22 @@ def main(url):
     """Download the models specified in config/models.yaml"""
     models = _flatten(serenade.config.models())
     for path, model in models.items():
+        archive = serenade.config.library_path("models", path, f"{model}.tar.gz")
         version_file = serenade.config.library_path("models", path, "v")
         if os.path.exists(version_file):
             with open(version_file) as f:
                 version = f.read().strip()
                 if version == model:
+                    click.echo(f"Already exists: {archive}")
                     continue
 
-        archive = serenade.config.library_path("models", path, f"{model}.tar.gz")
         if not os.path.exists(archive):
             shutil.rmtree(os.path.dirname(archive), ignore_errors=True)
             os.makedirs(os.path.dirname(archive), exist_ok=True)
             click.echo(f"Downloading model: {path}/{model}")
             serenade.packages.download(f"{url}/{path}/{model}.tar.gz", archive)
+        else:
+            click.echo(f"Already exists: {archive}")
 
         with tarfile.open(archive, mode="r:gz") as f:
             f.extractall(os.path.dirname(archive))

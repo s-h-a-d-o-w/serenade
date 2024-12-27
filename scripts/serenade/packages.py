@@ -1,3 +1,4 @@
+import click
 import boto3
 import os.path
 import requests
@@ -33,6 +34,7 @@ def download(url, path):
     else:
         with requests.get(url, allow_redirects=True, stream=True) as r:
             r.raise_for_status()
+            click.echo(f"Writing to: {path}")
             with open(path, "wb") as f:
                 for chunk in r.iter_content(chunk_size=8192):
                     f.write(chunk)
