@@ -14,7 +14,6 @@ services:
       - "gradle:/root/.gradle"
       - "logs:/logs"
       - "${SERENADE_SOURCE_ROOT:-~/serenade}:/root/serenade"
-      - "${SERENADE_DEV_TREE_SITTER_ROOT:-~/dev-tree-sitter}:/root/dev-tree-sitter"
     networks:
       dev:
         aliases:
