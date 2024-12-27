@@ -2,7 +2,7 @@
 
 Serenade is built using the [Gradle](https://gradle.org) build system. We also have a few scripts useful for running various Serenade services.
 
-## Client
+## Client (dev)
 
 To run the Serenade app, simply run:
 
@@ -14,6 +14,29 @@ This will run a local version of the client that uses Serenade Cloud as the back
 If you'd instead like the client to connect to a specific endpoint (e.g., a local server you're running yourself), you can run:
 
     ENDPOINT=http://localhost:17200 ./bin/dev.py
+
+## Client (release)
+
+The following works on Windows too!
+
+1. Set `SERENADE_SOURCE_ROOT` to wherever you have the source code checked out.
+2. Run (see sections below for more detail):
+```
+docker compose -f config/docker-compose.yaml up -d
+docker compose -f config/docker-compose.yaml exec serenade bash
+```
+3. In the docker container shell (this creates the files necessary to distribute the local server):
+```
+gradle installd
+gradle client:installServer
+exit
+```
+4. In `client`:
+```
+npm install
+npm run package
+```
+5. Packaged files will be in `client/dist`.
 
 ## Service Setup
 
