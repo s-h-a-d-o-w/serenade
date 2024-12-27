@@ -88,14 +88,24 @@ subprojects {
 }
 
 task downloadModels(type: Exec) {
-    inputs.file "bin/download-models.py"
-    commandLine "./bin/download-models.py"
+    inputs.file file("bin/download-models.py")
+    workingDir projectDir
+    if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+        commandLine "python", file("bin/download-models.py")
+    } else {
+        commandLine "python3", file("bin/download-models.py")
+    }
 }
 
 task packageJdk(type: Exec) {
-    inputs.file "bin/build-jdk.py"
-    outputs.file "build/distributions/jdk.tar.gz"
-    commandLine "./bin/build-jdk.py"
+    inputs.file file("bin/build-jdk.py")
+    outputs.file file("build/distributions/jdk.tar.gz")
+    workingDir projectDir
+    if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+        commandLine "python", file("bin/build-jdk.py")
+    } else {
+        commandLine "python3", file("bin/build-jdk.py")
+    }
 }
 
 task createPackages {

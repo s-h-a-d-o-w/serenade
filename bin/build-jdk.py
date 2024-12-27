@@ -4,6 +4,8 @@ import os
 import shutil
 import subprocess
 import sys
+import tarfile
+from pathlib import Path
 
 os.chdir(os.path.dirname(os.path.realpath(__file__)) + "/../")
 shutil.rmtree("build/distributions/jdk", ignore_errors=True)
@@ -25,13 +27,24 @@ subprocess.check_call(
 )
 
 # replace symlinks with original files
-subprocess.check_call(
-    "cp -RL build/distributions/jdk/legal build/distributions/jdk/legal2 && rm -rf build/distributions/jdk/legal && mv build/distributions/jdk/legal2 build/distributions/jdk/legal && chmod -R 755 build/distributions/jdk/legal",
-    shell=True,
-)
+dist_path = Path("build/distributions/jdk")
+legal_path = dist_path / "legal"
+legal_temp = dist_path / "legal2"
 
-subprocess.check_call(
-    ["tar", "-C", "build/distributions", "-czf", "build/distributions/jdk.tar.gz", "jdk"]
-)
+# Copy with resolved links, remove old dir, rename temp
+shutil.copytree(legal_path, legal_temp, copy_function=shutil.copy2, symlinks=False)
+shutil.rmtree(legal_path)
+legal_temp.rename(legal_path)
+
+# Set permissions (755 in octal = 493 in decimal)
+for root, dirs, files in os.walk(legal_path):
+    for d in dirs:
+        os.chmod(os.path.join(root, d), 0o755)
+    for f in files:
+        os.chmod(os.path.join(root, f), 0o755)
+
+# Create tar.gz archive
+with tarfile.open("build/distributions/jdk.tar.gz", "w:gz") as tar:
+    tar.add("build/distributions/jdk", arcname="jdk")
 
 shutil.rmtree("build/distributions/jdk", ignore_errors=True)
