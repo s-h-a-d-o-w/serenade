@@ -1,7 +1,7 @@
 {
   "name": "Serenade",
   "productName": "Serenade",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "author": "Serenade Labs, Inc. <contact@serenade.ai>",
   "description": "Code with voice. Learn more at https://serenade.ai",
   "license": "MIT",
@@ -25,11 +25,15 @@
       "target": [
         {
           "target": "dmg",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         },
         {
           "target": "zip",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         }
       ]
     },
@@ -37,7 +41,9 @@
       "target": [
         {
           "target": "nsis",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         }
       ]
     },
@@ -45,7 +51,9 @@
       "target": [
         {
           "target": "AppImage",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         }
       ]
     },
@@ -54,7 +62,9 @@
     },
     "protocols": {
       "name": "serenade-protocol",
-      "schemes": ["serenade"]
+      "schemes": [
+        "serenade"
+      ]
     },
     "publish": {
       "provider": "generic",
@@ -71,7 +81,7 @@
     "dev:main": "cross-env NODE_ENV=development webpack --config main.webpack.ts --mode=development && npm run start:electron",
     "dev:renderer": "cross-env NODE_ENV=development webpack-dev-server --config renderer.webpack.ts --mode=development",
     "electron:serve": "wait-on http-get://localhost:4000/ && npm run dev:main",
-    "package": "npm-run-all build package:dist",
+    "package": "rimraf dist && npm-run-all build package:dist",
     "package:unsigned": "cross-env SKIP_SIGN=1 npm-run-all build package:distunsigned",
     "package:dist": "electron-builder",
     "package:distunsigned": "electron-builder -c.mac.identity=null",
@@ -80,7 +90,9 @@
     "start:electron": "electron ."
   },
   "electronWebpack": {
-    "whiteListedModules": ["react-redux"]
+    "whiteListedModules": [
+      "react-redux"
+    ]
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
@@ -134,6 +146,7 @@
     "postcss": "^8.4.5",
     "postcss-loader": "^6.2.1",
     "prettier": "^2.2.0",
+    "rimraf": "^6.0.1",
     "style-loader": "^3.3.1",
     "tailwindcss": "^3.0.8",
     "ts-loader": "^9.2.6",
