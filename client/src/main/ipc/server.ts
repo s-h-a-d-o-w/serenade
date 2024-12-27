@@ -44,6 +44,7 @@ export default class IPCServer {
             icon = undefined;
           }
 
+          // Where plugins essentially "register"
           this.pluginManager.updateActive(
             websocket,
             request.data.id,
