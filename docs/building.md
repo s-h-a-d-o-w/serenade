@@ -30,6 +30,7 @@ docker compose -f config/docker-compose.yaml exec serenade bash
 gradle installd
 gradle client:installServer
 exit
+docker compose -f config/docker-compose.yaml down --remove-orphans
 ```
 4. In `client`:
 ```
