@@ -2,12 +2,17 @@
 
 Serenade is built using the [Gradle](https://gradle.org) build system. We also have a few scripts useful for running various Serenade services.
 
+## Requirements
+
+- Python 3 (available as `python`)
+
 ## Client (dev)
 
 To run the Serenade app, simply run:
 
     cd client
-    ./bin/dev.py
+    pnpm install
+    python bin/dev.py
 
 This will run a local version of the client that uses Serenade Cloud as the backend.
 
@@ -20,7 +25,14 @@ If you'd instead like the client to connect to a specific endpoint (e.g., a loca
 The following works on Windows too!
 
 1. Set `SERENADE_SOURCE_ROOT` to wherever you have the source code checked out.
-2. Run (see sections below for more detail):
+1. If you've never run the dev server (previous section), run:
+ ```
+ cd client
+ pnpm install
+ python bin/build.py
+ cd ..
+ ```
+2. Run in project root (see sections below for more detail if you're curious):
 ```
 docker compose -f config/docker-compose.yaml up -d
 docker compose -f config/docker-compose.yaml exec serenade bash
@@ -29,13 +41,10 @@ docker compose -f config/docker-compose.yaml exec serenade bash
 ```
 gradle installd
 gradle client:installServer
-exit
-docker compose -f config/docker-compose.yaml down --remove-orphans
 ```
-4. In `client`:
+4. `exit` (optionally `docker compose -f config/docker-compose.yaml down --remove-orphans`), then still in `client`:
 ```
-npm install
-npm run package
+pnpm bundle
 ```
 5. Packaged files will be in `client/dist`.
 

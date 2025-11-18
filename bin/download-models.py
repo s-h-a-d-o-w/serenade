@@ -9,7 +9,9 @@ import sys
 import tarfile
 
 sys.path.append(
-    os.path.join(os.getenv("SERENADE_SOURCE_ROOT") or os.path.expanduser("~/serenade"), "scripts")
+    os.path.join(
+        os.getenv("SERENADE_SOURCE_ROOT") or os.path.expanduser("~/serenade"), "scripts"
+    )
 )
 import serenade.config
 import serenade.packages
@@ -49,7 +51,7 @@ def main(url):
         if not os.path.exists(archive):
             shutil.rmtree(os.path.dirname(archive), ignore_errors=True)
             os.makedirs(os.path.dirname(archive), exist_ok=True)
-            click.echo(f"Downloading model: {path}/{model}")
+            click.echo(f"Downloading model: {url}/{path}/{model}")
             serenade.packages.download(f"{url}/{path}/{model}.tar.gz", archive)
         else:
             click.echo(f"Already exists: {archive}")
