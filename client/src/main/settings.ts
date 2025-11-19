@@ -1,6 +1,7 @@
 import { screen } from "electron";
 import { jsonc } from "jsonc";
-import * as fs from "fs-extra";
+import fs from "fs-extra";
+import { existsSync } from "node:fs";
 import * as os from "os";
 import * as path from "path";
 import Microphone from "./stream/microphone";
@@ -23,7 +24,7 @@ export default class Settings {
 
   private createIfNotExists(file: string) {
     fs.mkdirpSync(this.path());
-    if (!fs.existsSync(file)) {
+    if (!existsSync(file)) {
       fs.closeSync(fs.openSync(file, "w"));
     }
   }

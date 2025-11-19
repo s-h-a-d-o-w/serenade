@@ -1,9 +1,7 @@
 @import url("https://use.typekit.net/rwt5gge.css");
-@import "~codemirror-minified/lib/codemirror.css";
+@import "codemirror-minified/lib/codemirror.css";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @layer components {
   .primary-button {
@@ -72,23 +70,6 @@ input[type="number"]::-webkit-outer-spin-button {
   opacity: 1;
 }
 
-/* *::-webkit-scrollbar-track,
-*::-webkit-scrollbar,
-*::-webkit-scrollbar-thumb {
-  height: 6px;
-  width: 6px;
-} */
-
-*::-webkit-scrollbar-track {
-  background: #e2e8f0;
-  border-radius: 5px;
-}
-
-*::-webkit-scrollbar-thumb {
-  background: #c4b5fd;
-  border-radius: 5px;
-}
-
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg);
@@ -142,3 +123,35 @@ input[type="number"]::-webkit-outer-spin-button {
 .CodeMirror {
   height: 100%;
 }
+
+/* Scrollbar reset code */
+* {
+  scrollbar-width: auto !important;
+/*  Styling color is necessary for all scrollbars
+  to use the custom styles below on Chrome. */
+  scrollbar-color: auto !important;
+}
+
+*::-webkit-scrollbar {
+  all: initial !important;
+  background: #f1f1f1 !important;
+}
+*::-webkit-scrollbar-thumb {
+all: initial !important;
+/*  Doesn't work */
+/*     width: 14px !important; */
+/*  Doesn't work */
+/*     border: 2px solid #f1f1f1; */
+  background: #c1c1c1 !important;
+}
+*::-webkit-scrollbar-thumb:hover {
+all: initial !important;
+  background: #a8a8a8 !important;
+}
+*::-webkit-scrollbar-button {
+  all: initial !important;
+  display: none !important;
+}
+*::-webkit-scrollbar-track { all: initial !important; }
+*::-webkit-scrollbar-track-piece { all: initial !important; }
+

@@ -1,10 +1,13 @@
-shamefullyHoist: true
 onlyBuiltDependencies:
   - '@fortawesome/fontawesome-common-types'
   - '@fortawesome/fontawesome-svg-core'
   - '@fortawesome/free-regular-svg-icons'
   - '@fortawesome/free-solid-svg-icons'
   - electron
+  - electron-winstaller
+  - esbuild
   - protobufjs
   - serenade-driver
   - speech-recorder
+
+shamefullyHoist: true

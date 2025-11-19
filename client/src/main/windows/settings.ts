@@ -7,8 +7,6 @@ import RendererBridge from "../bridge";
 import Settings from "../settings";
 import Window from "./window";
 
-declare var __static: string;
-
 export default class SettingsWindow extends Window {
   constructor(
     private app: App,

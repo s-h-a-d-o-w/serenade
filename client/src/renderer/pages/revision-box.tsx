@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import store from "../state/store";
-import { SupportIcon } from "@heroicons/react/outline";
+import { ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/outline";
 import { connect } from "react-redux";
 import * as actions from "../state/actions";
 import icon from "../../../static/img/icon.png";
@@ -172,7 +172,7 @@ export const RevisionBoxPageComponent: React.FC<{
                 setHelpShown(false);
               }}
             >
-              <SupportIcon className="w-[20px]" />
+              <ChatBubbleLeftEllipsisIcon className="w-[20px]" />
             </a>
             <div
               className={classNames(

@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from "react";
 import classNames from "classnames";
 import { Listbox, Transition } from "@headlessui/react";
-import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { CheckIcon } from "@heroicons/react/24/solid";
+import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
 
 export const Select: React.FC<{
   items: string[];
@@ -14,7 +15,7 @@ export const Select: React.FC<{
         <Listbox.Button className="relative w-full py-1 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-violet-600 text-sm dark:text-slate-600">
           <span className="block truncate">{value}</span>
           <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-            <SelectorIcon className="w-5 h-5 text-gray-400" aria-hidden="true" />
+            <ChevronUpDownIcon className="w-5 h-5 text-gray-400" aria-hidden="true" />
           </span>
         </Listbox.Button>
         <Transition

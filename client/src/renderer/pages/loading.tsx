@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { LoadingBar } from "../components/loading-bar";
 import { Spinner } from "../components/spinner";
@@ -12,9 +12,9 @@ const LoadingPageComponent: React.FC<{
   miniMode: boolean;
 }> = ({ loadingPageMessage, loadingPageProgress, loggedIn, miniMode }) => {
   if (loggedIn === true) {
-    return <Redirect to="/alternatives" />;
+    return <Navigate to="/alternatives" />;
   } else if (loggedIn === false) {
-    return <Redirect to="/welcome" />;
+    return <Navigate to="/welcome" />;
   }
 
   return (

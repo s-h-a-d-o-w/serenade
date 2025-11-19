@@ -1,4 +1,4 @@
-import { app, screen, Menu, MenuItemConstructorOptions, Tray } from "electron";
+import { app, screen, Menu, MenuItemConstructorOptions, Tray, Event } from "electron";
 import * as os from "os";
 import * as path from "path";
 import App from "../app";
@@ -149,7 +149,7 @@ export default class MainWindow extends Window {
     await super.createWindow(bridge, settings);
     this.resizeToCurrentMode();
 
-    this.window?.on("close", async (e: any) => {
+    this.window?.on("close", async (e: Event) => {
       // suppress errors that might occur while closing the app
       try {
         if (!this.quitInProgress && this.settings.getContinueRunningInTray()) {
@@ -170,29 +170,29 @@ export default class MainWindow extends Window {
       return true;
     });
 
-    this.window?.on("minimize", (e: any) => {
+    this.window?.on("minimize", () => {
       this.hide(true);
     });
 
-    this.window?.on("move", (e: any) => {
+    this.window?.on("move", () => {
       this.windowMoved();
     });
 
-    this.window?.on("resize", (e: any) => {
+    this.window?.on("resize", () => {
       if (this.resizeCallbackEnabled) {
         this.windowMoved();
       }
     });
 
-    this.window?.on("show", (e: any) => {
+    this.window?.on("show", () => {
       this.show(true);
     });
 
-    this.window?.on("restore", (e: any) => {
+    this.window?.on("restore", () => {
       this.show(true);
     });
 
-    app.on("activate", (_event: any, hasVisibleWindows: boolean) => {
+    app.on("activate", (_event: Event, hasVisibleWindows: boolean) => {
       if (!hasVisibleWindows) {
         this.show();
       }

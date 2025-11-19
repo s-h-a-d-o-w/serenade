@@ -1,14 +1,21 @@
 import HtmlWebpackPlugin from "html-webpack-plugin";
-import * as path from "path";
-import { Configuration } from "webpack";
-import * as webpackDevServer from "webpack-dev-server";
+import path, { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import type { Configuration as WebpackDevServerConfiguration } from "webpack-dev-server";
+import type { Configuration } from "webpack";
 
-const config: Configuration = {
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const config: WebpackDevServerConfiguration & Configuration = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
     mainFields: ["main", "module", "browser"],
   },
-  entry: path.resolve(__dirname, "src/renderer/index.tsx"),
+  watchOptions: {
+    ignored: ["**/out/**", "**/node_modules/**"],
+    aggregateTimeout: 300,
+  },
+  entry: path.join(__dirname, "src/renderer/index.tsx"),
   target: "electron-renderer",
   devtool: "source-map",
   module: {
@@ -16,11 +23,16 @@ const config: Configuration = {
       {
         test: /\.(ts|tsx)$/,
         include: [
-          path.resolve(__dirname, "src/gen"),
-          path.resolve(__dirname, "src/renderer"),
-          path.resolve(__dirname, "src/shared"),
+          path.join(__dirname, "src/gen"),
+          path.join(__dirname, "src/renderer"),
+          path.join(__dirname, "src/shared"),
         ],
-        use: ["ts-loader"],
+        use: {
+          loader: "ts-loader",
+          options: {
+            transpileOnly: true,
+          },
+        },
       },
       {
         test: /\.(png|svg|jpg)$/i,
@@ -28,7 +40,7 @@ const config: Configuration = {
       },
       {
         test: /\.css$/,
-        include: [path.resolve(__dirname, "src/renderer/css")],
+        include: [path.join(__dirname, "src/renderer/css")],
         use: [
           {
             loader: "style-loader",
@@ -47,20 +59,28 @@ const config: Configuration = {
     ],
   },
   devServer: {
-    static: {
-      directory: path.resolve(__dirname, "out/renderer"),
-      publicPath: "/",
-    },
+    static: false,
+    // static: {
+    //   directory: path.join(__dirname, "out/renderer"),
+    //   publicPath: "/",
+    // },
     port: 4000,
     historyApiFallback: true,
     compress: true,
+    watchFiles: {
+      paths: ["src/**/*"],
+      options: {
+        ignored: ["**/out/**"],
+        usePolling: false,
+      },
+    },
   },
   output: {
-    path: path.resolve(__dirname, "out/renderer"),
+    path: path.join(__dirname, "out/renderer"),
     filename: "js/[name].js",
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: path.resolve(__dirname, "src/renderer/index.html") }),
+    new HtmlWebpackPlugin({ template: path.join(__dirname, "src/renderer/index.html") }),
   ],
 };
 

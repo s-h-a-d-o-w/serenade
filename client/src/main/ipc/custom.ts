@@ -1,8 +1,8 @@
 import WebSocket from "ws";
-import * as child_process from "child_process";
-import * as fs from "fs-extra";
-import * as os from "os";
-import * as path from "path";
+import { type ChildProcess, fork, spawnSync } from "child_process";
+import fs from "fs-extra";
+import os from "os";
+import path from "path";
 import Settings from "../settings";
 
 export default class Custom {
@@ -33,7 +33,7 @@ For more information, check out the Serenade API documentation: https://serenade
 
   private keepAliveInterval?: NodeJS.Timeout;
   private keepAliveTimeout?: NodeJS.Timeout;
-  private process?: child_process.ChildProcess;
+  private process?: ChildProcess;
   private resolveStart?: () => void;
   public socket?: WebSocket;
 
@@ -89,7 +89,7 @@ For more information, check out the Serenade API documentation: https://serenade
         "custom-commands-server",
         "serenade-custom-commands-server.min.js"
       ),
-      `${server}/serenade-custom-commands-server.min.js`
+      `${server}/serenade-custom-commands-server.min.cjs`
     );
     await fs.copy(
       path.join(__dirname, "static", "custom-commands-server-modules"),
@@ -119,7 +119,7 @@ For more information, check out the Serenade API documentation: https://serenade
       this.resolveStart = resolve;
       this.stop();
       const stream = fs.createWriteStream(path.join(this.settings.path(), "serenade.log"));
-      this.process = child_process.fork("serenade-custom-commands-server.min.js", [], {
+      this.process = fork("serenade-custom-commands-server.min.cjs", [], {
         cwd: path.join(this.settings.path(), "ipc"),
         stdio: "pipe",
       });
@@ -160,7 +160,7 @@ For more information, check out the Serenade API documentation: https://serenade
       this.process.kill("SIGTERM");
       this.process = undefined;
       if (os.platform() != "win32") {
-        child_process.spawnSync("pkill", ["-f", "serenade-custom-commands-server"]);
+        spawnSync("pkill", ["-f", "serenade-custom-commands-server"]);
       }
     }
   }

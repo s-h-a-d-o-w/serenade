@@ -1,4 +1,4 @@
-import { core } from "../gen/core";
+import { core } from "../gen/core.js";
 import bash from "../../static/img/bash.png";
 import csharp from "../../static/img/csharp.png";
 import c from "../../static/img/c.png";

@@ -32,7 +32,7 @@ export default class TextInputWindow extends Window {
       this.window?.setWindowButtonVisibility(false);
     }
 
-    this.window?.on("move", (e: any) => {
+    this.window?.on("move", () => {
       this.x = this.window!.getBounds().x;
       this.y = this.window!.getBounds().y;
     });

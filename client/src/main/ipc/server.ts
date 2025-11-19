@@ -1,4 +1,4 @@
-import WebSocket from "ws";
+import { WebSocketServer, WebSocket } from "ws";
 import Active from "../active";
 import Custom from "./custom";
 import MainWindow from "../windows/main";
@@ -12,7 +12,7 @@ import Log from "../log";
 const maximumIconLength = 20000;
 
 export default class IPCServer {
-  private server: WebSocket.Server;
+  private server: WebSocketServer;
 
   constructor(
     private active: Active,
@@ -24,8 +24,8 @@ export default class IPCServer {
     private stream: Stream,
     private log: Log
   ) {
-    this.server = new WebSocket.Server({ host: "localhost", port: 17373 });
-    this.server.on("connection", (websocket) => {
+    this.server = new WebSocketServer({ host: "localhost", port: 17373 });
+    this.server.on("connection", (websocket: WebSocket) => {
       websocket.on("message", (message) => {
         const request = JSON.parse(typeof message === "string" ? message : message.toString());
 

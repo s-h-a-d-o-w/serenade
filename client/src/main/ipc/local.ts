@@ -1,20 +1,21 @@
-import fetch from "electron-fetch";
-import * as child_process from "child_process";
-import * as fs from "fs-extra";
-import * as os from "os";
-import * as path from "path";
+import fs from "fs-extra";
+import os from "os";
+import path from "path";
+import { fetchWithTimeout } from "../utils/fetchWithTimeout";
 import * as semver from "semver";
 import Log from "../log";
 import MainWindow from "../windows/main";
 import Metadata from "../../shared/metadata";
 import RendererBridge from "../bridge";
 import Settings from "../settings";
-const commandExists = require("command-exists");
+import { type ChildProcess, spawnSync } from "child_process";
+import { spawn } from "child_process";
+import commandExists from "command-exists";
 
 type RunnableService = "core" | "speech-engine" | "code-engine";
 
 export default class Local {
-  private processes: { [key in RunnableService]?: child_process.ChildProcess } = {};
+  private processes: { [key in RunnableService]?: ChildProcess } = {};
   private logStreams: { [key in RunnableService]?: fs.WriteStream } = {};
   private pollingInterval?: NodeJS.Timeout;
   private started: boolean = false;
@@ -27,7 +28,7 @@ export default class Local {
     private settings: Settings
   ) {}
 
-  private captureOutput(service: RunnableService, child: child_process.ChildProcess) {
+  private captureOutput(service: RunnableService, child: ChildProcess) {
     if (this.logStreams[service]) {
       return;
     }
@@ -59,7 +60,7 @@ export default class Local {
     this.pkill("run-pro");
   }
 
-  private killProcess(child?: child_process.ChildProcess) {
+  private killProcess(child?: ChildProcess) {
     if (child) {
       child.kill("SIGTERM");
     }
@@ -68,9 +69,9 @@ export default class Local {
   private pkill(name: string) {
     try {
       if (os.platform() == "win32") {
-        child_process.spawnSync("wsl.exe", ["pkill", "-f", name]);
+        spawnSync("wsl.exe", ["pkill", "-f", name]);
       } else {
-        child_process.spawnSync("pkill", ["-f", name]);
+        spawnSync("pkill", ["-f", name]);
       }
     } catch (e) {}
   }
@@ -97,7 +98,7 @@ export default class Local {
     this.pollingInterval = global.setInterval(async () => {
       // speech-engine is always the last to load, so poll until it's ready
       try {
-        const response = await fetch("http://localhost:17202/api/status");
+        const response = await fetchWithTimeout("http://localhost:17202/api/status", {}, 1000);
         if (await response.json()) {
           this.stopPolling();
           this.bridge.setState(
@@ -107,7 +108,9 @@ export default class Local {
             [this.mainWindow]
           );
         }
-      } catch (e) {}
+      } catch (e) {
+        // console.log("Error polling IPC endpoint: ", e);
+      }
     }, 1000);
   }
 
@@ -137,8 +140,7 @@ export default class Local {
     if (os.platform() == "win32") {
       speechEngineModels =
         "/" +
-        child_process
-          .spawnSync("wsl.exe", [
+        spawnSync("wsl.exe", [
             "wslpath",
             "-a",
             "'" + speechEngineModels.replace("\\", "\\\\") + "'",
@@ -149,8 +151,7 @@ export default class Local {
 
       codeEngineModels =
         "/" +
-        child_process
-          .spawnSync("wsl.exe", [
+        spawnSync("wsl.exe", [
             "wslpath",
             "-a",
             "'" + codeEngineModels.replace("\\", "\\\\") + "'",
@@ -161,7 +162,7 @@ export default class Local {
     }
 
     // here and below: WSL doesn't deal well with paths, so set the cwd to be the same as the binary
-    this.processes["speech-engine"] = child_process.spawn(
+    this.processes["speech-engine"] = spawn(
       os.platform() == "win32" ? "wsl.exe" : "./run-pro",
       os.platform() == "win32" ? ["./run-pro", speechEngineModels] : [speechEngineModels],
       {
@@ -172,7 +173,7 @@ export default class Local {
     );
     this.captureOutput("speech-engine", this.processes["speech-engine"]);
 
-    this.processes["code-engine"] = child_process.spawn(
+    this.processes["code-engine"] = spawn(
       os.platform() == "win32" ? "wsl.exe" : "./run-pro",
       os.platform() == "win32" ? ["./run-pro", codeEngineModels] : [codeEngineModels],
       {
@@ -183,7 +184,7 @@ export default class Local {
     );
     this.captureOutput("code-engine", this.processes["code-engine"]);
 
-    this.processes["core"] = child_process.spawn(
+    this.processes["core"] = spawn(
       os.platform() == "win32" ? "wsl.exe" : "./run-pro",
       os.platform() == "win32" ? ["./run-pro"] : [],
       {

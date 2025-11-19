@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { AlternativesPage } from "./pages/alternatives";
 import { LoadingPage } from "./pages/loading";
@@ -19,12 +19,10 @@ import "./css/main.css";
 
 const AppComponent: React.FC<{
   darkTheme: boolean;
-  location: {
-    pathname: string;
-  };
   miniMode: boolean;
   nuxCompleted: boolean;
-}> = ({ darkTheme, location, miniMode, nuxCompleted }) => {
+}> = ({ darkTheme, miniMode, nuxCompleted }) => {
+  const location = useLocation();
   // set this manually to always render a page for development
   let page = null;
   const miniModeWindow = location.pathname.endsWith("minimode");
@@ -40,20 +38,20 @@ const AppComponent: React.FC<{
       {page ? (
         page
       ) : (
-        <Switch>
-          <Route exact path="/" render={() => <LoadingPage />} />
-          <Route exact path="/alternatives" render={() => <AlternativesPage />} />
-          <Route exact path="/input" render={() => <TextInputPage />} />
-          <Route exact path="/languages" render={() => <LanguagesPage />} />
-          <Route exact path="/minimode" render={() => <MiniModePage />} />
-          <Route exact path="/permissions" render={() => <PermissionsPage />} />
-          <Route exact path="/plugins" render={() => <PluginsPage />} />
-          <Route exact path="/privacy" render={() => <PrivacyPage />} />
-          <Route exact path="/revision" render={() => <RevisionBoxPage />} />
-          <Route exact path="/settings" render={() => <SettingsPage />} />
-          <Route exact path="/tutorials" render={() => <TutorialsPage />} />
-          <Route exact path="/welcome" render={() => <WelcomePage />} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<LoadingPage />} />
+          <Route path="/alternatives" element={<AlternativesPage />} />
+          <Route path="/input" element={<TextInputPage />} />
+          <Route path="/languages" element={<LanguagesPage />} />
+          <Route path="/minimode" element={<MiniModePage />} />
+          <Route path="/permissions" element={<PermissionsPage />} />
+          <Route path="/plugins" element={<PluginsPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/revision" element={<RevisionBoxPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/tutorials" element={<TutorialsPage />} />
+          <Route path="/welcome" element={<WelcomePage />} />
+        </Routes>
       )}
     </div>
   );
@@ -66,4 +64,4 @@ const mapState = (state: any) => ({
 });
 
 // @ts-ignore
-export const App = withRouter(connect(mapState)(AppComponent));
+export const App = connect(mapState)(AppComponent);

@@ -59,9 +59,9 @@ export default abstract class Window {
         });
       }
 
-      this.window.webContents.on("new-window", (e: any, url: string) => {
-        e.preventDefault();
-        shell.openExternal(url);
+      this.window.webContents.setWindowOpenHandler((details) => {
+        shell.openExternal(details.url);
+        return { action: "deny" };
       });
 
       this.window.once("ready-to-show", () => {

@@ -28,7 +28,6 @@ import System from "./execute/system";
 import TextInputWindow from "./windows/text-input";
 import Window from "./windows/window";
 import * as examples from "./examples";
-const { SpeechRecorder } = require("speech-recorder");
 
 export default class App {
   private bridge?: RendererBridge;
@@ -292,6 +291,8 @@ export default class App {
       miniModeWindow,
       settings
     );
+
+    console.log("App created");
 
     return instance;
   }

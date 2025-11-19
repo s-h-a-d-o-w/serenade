@@ -23,14 +23,15 @@ subprocess.check_call(
 
 # Build core
 os.makedirs("src/gen", exist_ok=True)
-if not os.path.exists("src/gen/core.js") or os.path.getmtime(
-    "../toolbelt/src/main/proto/core.proto"
-) > os.path.getmtime("src/gen/core.js"):
-    subprocess.check_call(
-        "npx pbjs -t static-module -o src/gen/core.js -w commonjs ../toolbelt/src/main/proto/core.proto",
-        shell=True,
-    )
+# if not os.path.exists("src/gen/core.js") or os.path.getmtime(
+#     "../toolbelt/src/main/proto/core.proto"
+# ) > os.path.getmtime("src/gen/core.js"):
 
-    subprocess.check_call("npx pbts -o src/gen/core.d.ts src/gen/core.js", shell=True)
+# subprocess.check_call(
+#     "npx pbjs -t static-module -o src/gen/core.js -w es6 ../toolbelt/src/main/proto/core.proto",
+#     shell=True,
+# )
+
+# subprocess.check_call("npx pbts -o src/gen/core.d.ts src/gen/core.js", shell=True)
 
 subprocess.check_call("npm run build", env=env, shell=True)

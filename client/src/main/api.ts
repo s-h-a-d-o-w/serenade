@@ -1,4 +1,3 @@
-import fetch from "electron-fetch";
 import { core } from "../gen/core";
 import Active from "./active";
 import Log from "./log";
@@ -8,6 +7,7 @@ import RendererBridge from "./bridge";
 import Settings from "./settings";
 import SettingsWindow from "./windows/settings";
 import { Endpoint } from "../shared/endpoint";
+import { fetchWithTimeout } from "./utils/fetchWithTimeout";
 
 export default class API {
   constructor(
@@ -42,17 +42,16 @@ export default class API {
       : `https://${this.settings.getStreamingEndpoint().address}`;
 
     try {
-      const response = await fetch(`${endpoint}${url}`, {
+      const response = await fetchWithTimeout(`${endpoint}${url}`, {
         method: "POST",
         body: requestClass.encode(requestClass.create(data)).finish(),
         headers: {
           "Content-Type": "application/octet-stream",
         },
-        timeout,
-      });
+      }, timeout);
 
-      const buffer = await response.buffer();
-      return responseClass.toObject(responseClass.decode(buffer), { defaults: true });
+      const buffer = await response.arrayBuffer();
+      return responseClass.toObject(responseClass.decode(new Uint8Array(buffer)), { defaults: true });
     } catch (e) {
       this.log.logError(e);
     }
@@ -125,7 +124,7 @@ export default class API {
     const url = endpoint.address.split(":")[0];
     try {
       const start = Date.now();
-      await fetch(`https://${url}/api/status`, { method: "POST", timeout: unreachable });
+      await fetchWithTimeout(`https://${url}/api/status`, { method: "POST" }, unreachable);
       const latency = Math.round(Date.now() - start);
       if (updateRenderer) {
         this.bridge.setState({ latency }, [this.mainWindow, this.settingsWindow()]);

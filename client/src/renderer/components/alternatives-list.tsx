@@ -16,7 +16,7 @@ import { Spinner } from "./spinner";
 import { UpdateNotification } from "./update-notification";
 import { isValidAlternative } from "../../shared/alternatives";
 import { tutorials } from "../../shared/tutorial";
-const reactStringReplace = require("react-string-replace");
+import reactStringReplace from "react-string-replace";
 
 const Alternative: React.FC<{
   alternative: {
@@ -320,7 +320,8 @@ const AlternativesListComponent: React.FC<{
       className={classNames("rounded-md p-3 text-sm bg-white dark:bg-slate-800", {
         "border shadow mt-2 mb-4 mx-2": !miniMode,
         "mb-2": miniMode,
-        "border shadow": miniMode && process.arch != "darwin",
+        "border shadow": miniMode,
+        // "border shadow": miniMode && process.arch != "darwin",
       })}
     >
       <div className="flex items-center">

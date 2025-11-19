@@ -1,11 +1,7 @@
-import child_process from "child_process";
-import { app, Notification } from "electron";
-import { autoUpdater } from "electron-updater";
-import * as fs from "fs";
+import { app } from "electron";
+// import { autoUpdater } from "electron-updater";
 import * as os from "os";
-import * as path from "path";
 import App from "./app";
-import Metadata from "../shared/metadata";
 
 let instance: App | null = null;
 const lock = app.requestSingleInstanceLock();
@@ -41,14 +37,14 @@ if (!lock) {
     }
   });
 
-  app.on("ready", async () => {
+  app.whenReady().then(async () => {
     // transparent windows need a slight delay to render correctly
     // https://github.com/electron/electron/issues/2170
     setTimeout(async () => {
       app.setName("Serenade");
       app.setAsDefaultProtocolClient("serenade");
       instance = await App.create();
-      autoUpdater.checkForUpdatesAndNotify();
+      // autoUpdater.checkForUpdatesAndNotify();
     }, 500);
   });
 }
