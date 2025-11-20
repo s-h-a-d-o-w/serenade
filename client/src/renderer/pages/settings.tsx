@@ -1,6 +1,5 @@
 import React from "react";
 import classNames from "classnames";
-import { Link } from "react-router-dom";
 import { ipcRenderer } from "electron";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

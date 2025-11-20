@@ -5,7 +5,6 @@ import { existsSync } from "node:fs";
 import * as os from "os";
 import * as path from "path";
 import Microphone from "./stream/microphone";
-import { core } from "../gen/core";
 import { Endpoint } from "../shared/endpoint";
 import { devices } from "speech-recorder";
 

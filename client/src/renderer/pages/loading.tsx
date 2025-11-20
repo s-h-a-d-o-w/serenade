@@ -1,5 +1,4 @@
 import React from "react";
-import classNames from "classnames";
 import { Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { LoadingBar } from "../components/loading-bar";

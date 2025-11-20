@@ -1,4 +1,3 @@
-import * as os from "os";
 import Active from "../active";
 import InsertHistory from "./insert-history";
 import RevisionBoxWindow from "../windows/revision-box";

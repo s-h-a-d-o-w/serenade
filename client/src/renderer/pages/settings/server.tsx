@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { ipcRenderer } from "electron";
 import { Row } from "../settings";
-import { LoadingBar } from "../../components/loading-bar";
 import { Select } from "../../components/select";
 import { Spinner } from "../../components/spinner";
 import { Toggle } from "../../components/toggle";

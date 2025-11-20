@@ -9,7 +9,6 @@ import RevisionBoxWindow from "./windows/revision-box";
 import Settings from "./settings";
 import System from "./execute/system";
 import RendererBridge from "./bridge";
-import { isValidAlternative } from "../shared/alternatives";
 import { filenameToLanguage, languages } from "../shared/languages";
 import { plugins } from "../shared/plugins";
 import { core } from "../gen/core";

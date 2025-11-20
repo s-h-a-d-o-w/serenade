@@ -1,5 +1,4 @@
 import { app } from "electron";
-// import { autoUpdater } from "electron-updater";
 import * as os from "os";
 import App from "./app";
 

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import classNames from "classnames";
 import { ipcRenderer } from "electron";
 import { Link } from "react-router-dom";
 import { Row } from "../settings";
