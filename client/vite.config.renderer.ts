@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import electron from 'vite-plugin-electron-renderer'
 import path from 'path'
 import { fileURLToPath } from 'url';
+import tailwindcss from '@tailwindcss/vite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -15,7 +16,7 @@ export default defineConfig({
     outDir: path.join(__dirname, "out/renderer"),
     sourcemap: true,
   },
-  plugins: [react(), electron()],
+  plugins: [react(), electron(), tailwindcss()],
   server: {
     port: 4000,
   },

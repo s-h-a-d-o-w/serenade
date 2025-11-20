@@ -122,7 +122,7 @@
   "devDependencies": {
     "@electron/notarize": "^3.1.1",
     "@rollup/plugin-commonjs": "^29.0.0",
-    "@tailwindcss/postcss": "^4.1.17",
+    "@tailwindcss/vite": "^4.1.17",
     "@types/command-exists": "^1.2.3",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.19.1",
