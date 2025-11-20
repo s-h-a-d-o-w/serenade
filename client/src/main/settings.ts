@@ -7,7 +7,7 @@ import * as path from "path";
 import Microphone from "./stream/microphone";
 import { core } from "../gen/core";
 import { Endpoint } from "../shared/endpoint";
-const { devices } = require("speech-recorder");
+import { devices } from "speech-recorder";
 
 export type Theme = "light" | "dark" | "system";
 

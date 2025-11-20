@@ -1,7 +1,11 @@
-require("dotenv").config();
-const { notarize } = require("electron-notarize");
+#!/usr/bin/env node
 
-exports.default = async function notarizing(context) {
+import dotenv from "dotenv";
+import { notarize } from "@electron/notarize";
+
+dotenv.config();
+
+export default async function notarizing(context) {
   const { electronPlatformName, appOutDir } = context;
   if (process.env.SKIP_SIGN || electronPlatformName !== "darwin") {
     return;

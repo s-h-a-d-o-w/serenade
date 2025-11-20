@@ -5,8 +5,8 @@ import { ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/outline";
 import { connect } from "react-redux";
 import * as actions from "../state/actions";
 import icon from "../../../static/img/icon.png";
-
-const CodeMirror = require("codemirror-minified");
+// @ts-expect-error - CodeMirror is not typed
+import CodeMirror from "codemirror-minified";
 
 export let codeMirror: any = null;
 export let textEditor: any = null;

@@ -1,6 +1,6 @@
 import WebSocket from "ws";
 import { type ChildProcess, fork, spawnSync } from "child_process";
-import fs from "fs-extra";
+import * as fs from "fs-extra";
 import os from "os";
 import path from "path";
 import Settings from "../settings";

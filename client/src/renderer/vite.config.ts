@@ -11,6 +11,8 @@ export default defineConfig({
   root: __dirname,
   base: './',
   build: {
+    // emptyOutDir: true,
+    // chunkSizeWarningLimit: 100000,
     outDir: path.join(__dirname, "../../out/renderer"),
   },
   plugins: [react(), electron()],

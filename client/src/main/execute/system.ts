@@ -1,7 +1,8 @@
 import { clipboard } from "electron";
 import * as os from "os";
 import Settings from "../settings";
-const driver = require("serenade-driver");
+// @ts-expect-error - Serenade driver is not typed
+import driver from "serenade-driver";
 
 export default class System {
   // some applications don't have what they're commonly referred to in their application bundle,
