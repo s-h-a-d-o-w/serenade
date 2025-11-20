@@ -9,7 +9,7 @@
   "private": true,
   "main": "./out/main.js",
   "scripts": {
-    "build": "pnpm setup && run-p build:main build:renderer",
+    "build": "pnpm run setup && run-p build:main build:renderer",
     "build:core": "pbjs -t static-module -o src/gen/core.js -w es6 ../toolbelt/src/main/proto/core.proto && pbts -o src/gen/core.d.ts src/gen/core.js",
     "build:main": "vite build",
     "build:renderer": "vite build --config vite.config.renderer.ts",
@@ -17,7 +17,7 @@
     "bundle": "rimraf dist && pnpm build && electron-builder",
     "bundle:unsigned": "pnpm build && cross-env SKIP_SIGN=1 electron-builder -c.mac.identity=null",
     "check:core": "node --experimental-transform-types scripts/checkCore.ts",
-    "dev": "pnpm setup && run-p dev:renderer wait-on:renderer",
+    "dev": "pnpm run setup && run-p dev:renderer wait-on:renderer",
     "dev:renderer": "vite --config vite.config.renderer.ts",
     "release": "npm-run-all build release:publish",
     "release:publish": "electron-builder --publish always",

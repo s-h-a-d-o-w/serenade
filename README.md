@@ -1,3 +1,17 @@
+# Forked from https://github.com/serenadeai/serenade
+
+## Differences
+
+### Features
+- Added support for cursor, windsurf
+
+### Bugs
+- Invisible mini window "removed"
+
+### Dev changes
+- Modernized client (node 22+ support, latest dependencies as of 11/2025, pnpm, vite)
+
+
 <img src="https://cdn.serenade.ai/img/logo-github.png" width="250px" alt="Serenade Logo" />
 
 # Serenade
