@@ -100,9 +100,7 @@ export default abstract class Window {
       return;
     }
 
-    if (process.env.NODE_ENV !== "production") {
-      this.window.loadURL(`http://localhost:4000#/${url}`);
-    } else {
+    if (import.meta.env.PROD) {
       this.window.loadURL(
         formatUrl({
           pathname: path.join(__dirname, "renderer/index.html"),
@@ -111,6 +109,8 @@ export default abstract class Window {
           hash: url,
         })
       );
+    } else {
+      this.window.loadURL(`http://localhost:4000#/${url}`);
     }
   }
 

@@ -19,9 +19,11 @@ const globalsForAllCoreModules = allCoreModules.reduce((acc, moduleName) => {
 
 export default defineConfig({
   build: {
-    // emptyOutDir: false,
-    // chunkSizeWarningLimit: 100000,
     outDir: path.join(__dirname, "out"),
+    emptyOutDir: false,
+    chunkSizeWarningLimit: 100000,
+    target: 'node22',
+    sourcemap: true,
     lib: {
       entry: path.join(__dirname, "./src/main/index.ts"),
       formats: ['es'],
@@ -37,8 +39,6 @@ export default defineConfig({
         'ws'
       ],
       output: {
-        globals: globalsForAllCoreModules,
-        inlineDynamicImports: true,
         banner: `import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
@@ -48,10 +48,6 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);`,
       },
     },
-    target: 'node22',
-    sourcemap: false,
-    minify: false,
-    emptyOutDir: false,
   },
   plugins: [
     viteStaticCopy({

@@ -121,14 +121,14 @@ export default class MainWindow extends Window {
         {
           label: "View",
           submenu: [
-            ...(process.env.NODE_ENV != "production"
-              ? ([
+            ...(import.meta.env.PROD
+              ? [] : ([
                   { role: "reload" },
                   { role: "forceReload" },
                   { role: "toggleDevTools" },
                   { type: "separator" },
                 ] as MenuItemConstructorOptions[])
-              : []),
+              ),
             { role: "resetZoom" },
             { role: "zoomIn" },
             { role: "zoomOut" },

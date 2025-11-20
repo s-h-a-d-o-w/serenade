@@ -15,5 +15,6 @@
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
+    "types": ["vite/client"],
   }
 }
