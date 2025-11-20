@@ -20,11 +20,12 @@
     "bundle": "rimraf dist && pnpm build && electron-builder",
     "bundle:unsigned": "pnpm build && cross-env SKIP_SIGN=1 electron-builder -c.mac.identity=null",
     "check:core": "node --experimental-transform-types scripts/checkCore.ts",
+    "check:customcommands": "node --experimental-transform-types scripts/checkCustomCommands.ts",
     "dev": "pnpm run setup && run-p dev:renderer wait-on:renderer",
     "dev:renderer": "vite --config vite.config.renderer.ts",
     "release": "npm-run-all build release:publish",
     "release:publish": "electron-builder --publish always",
-    "setup": "rimraf out && run-p check:core build:customcommands",
+    "setup": "rimraf out && run-p check:core check:customcommands",
     "start:electron": "cross-env ELECTRON_ENABLE_LOGGING=1 electron .",
     "typecheck": "tsc --noEmit",
     "wait-on:renderer": "wait-on http-get://localhost:4000/ && cross-env NODE_ENV=development vite build && pnpm start:electron"
