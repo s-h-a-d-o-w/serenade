@@ -147,7 +147,7 @@ export const RevisionBoxPageComponent: React.FC<{
 
   return (
     <div>
-      <div className="absolute top-0 left-0 right-0 h-[32px] border-b">
+      <div className="absolute top-0 left-0 right-0 h-[32px] border-b border-gray-200 dark:border-neutral-500">
         <div className="flex items-center justify-center h-[32px]">
           <img className="w-4 h-4 inline-block mr-1" src={icon} />
           <h3 className="inline-block font-medium">Revision Box</h3>
@@ -176,7 +176,7 @@ export const RevisionBoxPageComponent: React.FC<{
             </a>
             <div
               className={classNames(
-                "absolute top-[32px] right-1 z-20 w-96 px-2 py-1.5 bg-white text-sm border rounded shadow dark:bg-neutral-800 dark:border-neutral-500",
+                "absolute top-[32px] right-1 z-20 w-96 px-2 py-1.5 bg-white text-sm border border-gray-200 rounded shadow dark:bg-neutral-800 dark:border-neutral-500",
                 {
                   hidden: !helpShown,
                   "right-1": process.platform == "darwin",
@@ -198,12 +198,12 @@ export const RevisionBoxPageComponent: React.FC<{
                 <li>"cancel" to close this window and discard the text</li>
               </ul>
             </div>
-            <div className="border rounded dark:bg-gray-600 dark:text-neutral-100 dark:border-neutral-500">
+            <div className="border border-gray-200 rounded dark:bg-gray-600 dark:text-neutral-100 dark:border-neutral-500">
               <a
                 href="#"
                 onClick={(e) => toggleMode(e, "text")}
                 className={classNames(
-                  "px-2 py-[2px] rounded-[0.15rem] cursor-pointer transition-colors border-r rounded-r-none dark:border-neutral-500",
+                  "px-2 py-[2px] rounded-[0.15rem] cursor-pointer transition-colors border-r border-r-gray-200 rounded-r-none dark:border-neutral-500",
                   {
                     "bg-violet-600 text-white": revisionBoxMode == "text",
                   }

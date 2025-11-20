@@ -29,7 +29,7 @@ const LanguageIndicatorComponent: React.FC<{
 
   return (
     <a
-      className="inline-block text-slate-600 bg-gray-200 rounded text-xs px-1.5 py-0.5 mr-1 drop-shadow-sm transition-colors hover:bg-gray-300 dark:bg-gray-600 dark:text-neutral-100 dark:hover:bg-gray-700"
+      className="inline-block text-slate-600 bg-gray-200 rounded text-xs px-1.5 py-0.5 mr-1 transition-colors hover:bg-gray-300 dark:bg-gray-600 dark:text-neutral-100 dark:hover:bg-gray-700"
       href="#"
       onClick={(e: React.MouseEvent) => {
         e.preventDefault();

@@ -14,7 +14,7 @@ const VolumeIndicatorComponent: React.FC<{
   return (
     <div
       className={classNames(
-        "inline-block bg-gray-200 rounded text-center drop-shadow-sm mr-1 dark:bg-gray-600 dark:text-neutral-100",
+        "inline-block bg-gray-200 rounded text-center mr-1 dark:bg-gray-600 dark:text-neutral-100",
         {
           hidden:
             !speaking ||

@@ -12,7 +12,7 @@ export const Select: React.FC<{
   <div className="w-full">
     <Listbox value={value} onChange={onChange}>
       <div className="relative">
-        <Listbox.Button className="relative w-full py-1 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-violet-600 text-sm dark:text-slate-600">
+        <Listbox.Button className="relative w-full py-1 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-violet-600 text-sm dark:text-slate-600">
           <span className="block truncate">{value}</span>
           <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
             <ChevronUpDownIcon className="w-5 h-5 text-gray-400" aria-hidden="true" />
@@ -24,7 +24,7 @@ export const Select: React.FC<{
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none text-sm z-10">
+          <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black/5 focus:outline-none text-sm z-10">
             {items.map((item, i) => (
               <Listbox.Option
                 key={i}

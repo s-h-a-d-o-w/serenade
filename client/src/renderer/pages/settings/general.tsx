@@ -41,7 +41,7 @@ const GeneralComponent: React.FC<{
           title="Microphone"
           subtitle={
             <>
-              <div className="inline-block border rounded w-44 h-2">
+              <div className="inline-block border border-gray-200 rounded w-44 h-2 dark:border-neutral-500">
                 <div
                   className="bg-violet-600 h-full rounded transition-all"
                   style={{ width: volume * 100 + "%" }}

@@ -15,7 +15,7 @@
   }
 
   .input {
-    @apply text-slate-600 border rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-violet-600 shadow dark:bg-gray-700 dark:text-slate-200;
+    @apply text-slate-600 border border-gray-200 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-violet-600 shadow dark:bg-gray-700 dark:text-slate-200 dark:border-neutral-500;
   }
 }
 

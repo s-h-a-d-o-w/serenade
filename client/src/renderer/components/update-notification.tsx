@@ -10,7 +10,7 @@ const UpdateNotificationComponent: React.FC<{ miniMode: boolean; updateNotificat
     <div
       id="update-notification"
       className={classNames("rounded-md mb-4 p-3 text-sm bg-white dark:bg-neutral-800", {
-        "border shadow mt-2 mx-2": !miniMode,
+        "border border-gray-200 shadow mt-2 mx-2 dark:border-neutral-500": !miniMode,
       })}
     >
       {updateNotification == "available" ? (

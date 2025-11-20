@@ -55,7 +55,7 @@ const ActiveAppIndicatorComponent: React.FC<{
 
   const icon = customIcon || (Object.keys(apps).includes(app) ? apps[app].icon : windowIcon);
   return (
-    <div className="block text-xs drop-shadow-sm px-1.5 py-0.5 ">
+    <div className="block text-xs px-1.5 py-0.5 ">
       <img
         className="w-4 h-4 inline-block mr-1"
         src={icon}

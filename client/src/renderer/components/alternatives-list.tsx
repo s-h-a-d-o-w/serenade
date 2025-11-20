@@ -179,7 +179,7 @@ const TutorialSelection = () => {
   };
 
   return (
-    <div id="nux" className="border rounded shadow mx-2 p-3 relative dark:border-neutral-500">
+    <div id="nux" className="border border-gray-200 rounded shadow mx-2 p-3 relative dark:border-neutral-500">
       <h2 className="font-bold pb-1">Tutorials</h2>
       <a className="absolute top-[-4px] right-[4px]" href="#" onClick={close}>
         &times;
@@ -255,7 +255,7 @@ const AlternativesListComponent: React.FC<{
     .map((e: any, i: number) => (
       <div
         key={i}
-        className="bg-blue-400 text-white m-0.5 px-2 py-3 rounded-md shadow dark:bg-blue-700"
+        className="bg-blue-400 text-white m-0.5 mx-1 px-2 py-3 rounded-md shadow dark:bg-blue-700"
         style={{
           fontSize: "0.9rem",
           lineHeight: "1.2rem",
@@ -304,7 +304,7 @@ const AlternativesListComponent: React.FC<{
   const examplesSection =
     examples.length > 0 ? (
       <>
-        <h3 className="font-light text-sm mx-2 mt-1.5 mb-2 pb-1 border-b dark:border-neutral-500">
+        <h3 className="font-light text-sm mx-2 mt-1.5 mb-2 pb-1 border-b border-gray-200 dark:border-neutral-500">
           Try saying:
         </h3>
         {examples}
@@ -318,9 +318,9 @@ const AlternativesListComponent: React.FC<{
     <div
       id="suggestion"
       className={classNames("rounded-md p-3 text-sm bg-white dark:bg-slate-800", {
-        "border shadow mt-2 mb-4 mx-2": !miniMode,
+        "border border-gray-200 shadow mt-2 mb-4 mx-2 dark:border-neutral-500": !miniMode,
         "mb-2": miniMode,
-        "border shadow": miniMode,
+        "border border-gray-200 shadow dark:border-neutral-500": miniMode,
         // "border shadow": miniMode && process.arch != "darwin",
       })}
     >

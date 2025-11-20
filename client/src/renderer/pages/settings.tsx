@@ -56,7 +56,7 @@ export const Row: React.FC<{
   subtitle?: any;
   action: any;
 }> = ({ title, subtitle, action }) => (
-  <div className="flex items-center border-b py-2 dark:border-neutral-500">
+  <div className="flex items-center border-b border-gray-200 py-2 dark:border-neutral-500">
     <div>
       <h2 className="block font-medium text-sm">{title}</h2>
       {subtitle ? <h3 className="block text-sm">{subtitle}</h3> : null}

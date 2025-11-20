@@ -11,7 +11,7 @@ const ConnectionIndicatorComponent: React.FC<{
 }> = ({ endpoint, latency }) => (
   <div
     className={classNames(
-      "inline-block text-slate-600 bg-gray-200 rounded text-center drop-shadow-sm mr-1",
+      "inline-block text-slate-600 bg-gray-200 rounded text-center mr-1",
       {
         hidden: !endpoint || endpoint.id == "local" || latency < 500,
       }
