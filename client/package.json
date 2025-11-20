@@ -22,12 +22,12 @@
     "release": "npm-run-all build release:publish",
     "release:publish": "electron-builder --publish always",
     "setup": "rimraf out && run-p check:core build:customcommands",
-    "start:electron": "electron .",
+    "start:electron": "cross-env ELECTRON_ENABLE_LOGGING=1 electron .",
     "typecheck": "tsc --noEmit",
     "wait-on:renderer": "wait-on http-get://localhost:4000/ && cross-env NODE_ENV=development vite build && pnpm start:electron"
   },
   "build": {
-    "afterSign": "bin/notarize.js",
+    "afterSign": "scripts/notarize.js",
     "asar": false,
     "npmRebuild": false,
     "mac": {

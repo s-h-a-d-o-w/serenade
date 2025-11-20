@@ -2,23 +2,19 @@
 
 Serenade is built using the [Gradle](https://gradle.org) build system. We also have a few scripts useful for running various Serenade services.
 
-## Requirements
-
-- Python 3 (available as `python`)
-
 ## Client (dev)
 
 To run the Serenade app, simply run:
 
     cd client
     pnpm install
-    python bin/dev.py
+    pnpm dev
 
 This will run a local version of the client that uses Serenade Cloud as the backend.
 
 If you'd instead like the client to connect to a specific endpoint (e.g., a local server you're running yourself), you can run:
 
-    ENDPOINT=http://localhost:17200 ./bin/dev.py
+    ENDPOINT=http://localhost:17200 pnpm dev
 
 ## Client (release)
 
@@ -29,7 +25,7 @@ The following works on Windows too!
  ```
  cd client
  pnpm install
- python bin/build.py
+ pnpm build
  cd ..
  ```
 2. Run in project root (see sections below for more detail if you're curious):
