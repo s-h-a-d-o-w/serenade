@@ -23,6 +23,7 @@ export default class MiniModeWindow extends Window {
     }
 
     this.ignoreMouseEvents = ignoreMouseEvents;
+    this.window?.setIgnoreMouseEvents(ignoreMouseEvents);
   }
 
   static async create(
@@ -41,6 +42,8 @@ export default class MiniModeWindow extends Window {
     if (this.window?.setWindowButtonVisibility) {
       this.window?.setWindowButtonVisibility(false);
     }
+
+    this.window?.setIgnoreMouseEvents(true);
   }
 
   height(): number {
