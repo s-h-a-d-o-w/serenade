@@ -1,13 +1,20 @@
+packages:
+  - main
+  - renderer
+  - shared
+
 onlyBuiltDependencies:
   - '@fortawesome/fontawesome-common-types'
   - '@fortawesome/fontawesome-svg-core'
   - '@fortawesome/free-regular-svg-icons'
   - '@fortawesome/free-solid-svg-icons'
+  - bufferutil
   - electron
   - electron-winstaller
   - esbuild
   - protobufjs
   - serenade-driver
   - speech-recorder
+  - utf-8-validate
 
-shamefullyHoist: true
+# shamefullyHoist: true

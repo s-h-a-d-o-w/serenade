@@ -1,5 +1,5 @@
 {
-  "exclude": ["bin/**", "build/**", "dist/**", "static/**"],
+  "exclude": ["bin/**", "build/**", "dist/**", "out/**", "static/**"],
   "compilerOptions": {
     "target": "esnext",
     "module": "es2022",

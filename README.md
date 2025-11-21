@@ -4,9 +4,11 @@
 
 ### Features
 - Added support for cursor, windsurf
+- Improved security by forcing the UI to only accept local connections (and fonts via typekit)
 
 ### Bugs
-- Invisible mini window "removed"
+- Invisible mini window (left of the main window when not using compact UI, might only be a problem on Windows) "removed"
+- Slightly faster startup time
 
 ### Dev changes
 - Modernized client (node 22+ support, latest dependencies as of 11/2025, pnpm, vite)
