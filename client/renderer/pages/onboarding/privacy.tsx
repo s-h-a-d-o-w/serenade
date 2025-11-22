@@ -6,10 +6,10 @@ import { Row } from "../settings";
 import { Toggle } from "../../components/toggle";
 import onboardingPrivacy from "../../../static/img/onboarding-privacy.svg";
 
-const PrivacyPageComponent: React.FC<{ logAudio: boolean; logSource: boolean }> = ({
+const PrivacyPageComponent = ({
   logAudio,
   logSource,
-}) => {
+}: { logAudio: boolean; logSource: boolean }) => {
   return (
     <div className="h-screen w-full bg-slate-600 dark:bg-indigo-800">
       <div

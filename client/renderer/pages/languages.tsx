@@ -7,9 +7,9 @@ import { faCheck, faFileAlt, faSearch } from "@fortawesome/free-solid-svg-icons"
 import { core } from "../../gen/core";
 import { languages } from "shared/languages";
 
-const LanguagesPageComponent: React.FC<{ languageSwitcherLanguage: core.Language }> = ({
+const LanguagesPageComponent = ({
   languageSwitcherLanguage,
-}) => (
+}: { languageSwitcherLanguage: core.Language }) => (
   <div className="pt-[24px] h-full w-full">
     {["0"].concat(Object.keys(languages)).map((e: string) => {
       const language: core.Language = (e as unknown) as core.Language;

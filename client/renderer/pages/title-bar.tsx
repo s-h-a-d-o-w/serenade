@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faMinus } from "@fortawesome/free-solid-svg-icons";
 import { faSquare } from "@fortawesome/free-regular-svg-icons";
 
-const TitleBarComponent: React.FC<{ miniMode: boolean }> = ({ miniMode }) => {
+const TitleBarComponent = ({ miniMode }: { miniMode: boolean }) => {
   const [maximized, setMaximized] = useState(false);
 
   const minimize = (e: React.MouseEvent) => {

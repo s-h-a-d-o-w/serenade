@@ -106,10 +106,10 @@ export const setEditorState = (
   }
 };
 
-export const RevisionBoxPageComponent: React.FC<{
+export const RevisionBoxPageComponent = ({ revisionBoxMode, setRevisionBoxMode }: {
   revisionBoxMode: string;
   setRevisionBoxMode: (mode: string) => void;
-}> = ({ revisionBoxMode, setRevisionBoxMode }) => {
+}) => {
   const codeInput = useRef<HTMLTextAreaElement>(null);
   const textInput = useRef<HTMLTextAreaElement>(null);
   const [helpShown, setHelpShown] = useState(false);

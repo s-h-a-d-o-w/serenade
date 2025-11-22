@@ -2,10 +2,10 @@ import React from "react";
 import classNames from "classnames";
 import { connect } from "react-redux";
 
-const UpdateNotificationComponent: React.FC<{ miniMode: boolean; updateNotification: string }> = ({
+const UpdateNotificationComponent = ({
   miniMode,
   updateNotification,
-}) =>
+}: { miniMode: boolean; updateNotification: string }) =>
   updateNotification == "downloaded" || updateNotification == "available" ? (
     <div
       id="update-notification"

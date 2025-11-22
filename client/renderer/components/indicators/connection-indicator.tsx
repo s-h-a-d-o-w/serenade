@@ -5,10 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWifi } from "@fortawesome/free-solid-svg-icons";
 import { Endpoint } from "shared/endpoint";
 
-const ConnectionIndicatorComponent: React.FC<{
+const ConnectionIndicatorComponent = ({ endpoint, latency }: {
   endpoint: Endpoint;
   latency: number;
-}> = ({ endpoint, latency }) => (
+}) => (
   <div
     className={classNames(
       "inline-block text-slate-600 bg-gray-200 rounded text-center mr-1",

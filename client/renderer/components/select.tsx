@@ -4,11 +4,11 @@ import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/24/solid";
 import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
 
-export const Select: React.FC<{
+export const Select = ({ items, onChange, value }: {
   items: string[];
   onChange: (item: string) => void;
   value: string;
-}> = ({ items, onChange, value }) => (
+}) => (
   <div className="w-full">
     <Listbox value={value} onChange={onChange}>
       <div className="relative">

@@ -247,7 +247,7 @@ export default class Executor {
         if (commandType == core.CommandType.COMMAND_TYPE_DIFF && !state.canSetState) {
           count += this.nativeCommands.diffKeystrokesCount(state, command);
         } else if (commandType == core.CommandType.COMMAND_TYPE_INSERT) {
-          count += this.nativeCommands.insertKeystrokesCount(state, command.text);
+          count += this.nativeCommands.insertKeystrokesCount(command.text);
         } else if (
           commandType == core.CommandType.COMMAND_TYPE_UNDO &&
           this.nativeCommands.needsUndoStack(state) &&

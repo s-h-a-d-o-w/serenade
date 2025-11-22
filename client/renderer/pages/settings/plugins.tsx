@@ -79,12 +79,12 @@ const stylerToString = {
   [core.StylerType.STYLER_TYPE_RUSTFMT]: "rustfmt",
 };
 
-const PluginLink: React.FC<{
+const PluginLink = ({ title, subtitle, link, installed }: {
   title: string;
   subtitle: string;
   link: string;
   installed: boolean;
-}> = ({ title, subtitle, link, installed }) => (
+}) => (
   <Row
     title={title}
     subtitle={subtitle}
@@ -102,10 +102,10 @@ const PluginLink: React.FC<{
   />
 );
 
-const PluginsComponent: React.FC<{ installed: string[]; stylers: any }> = ({
+const PluginsComponent = ({
   installed,
   stylers,
-}) => (
+}: { installed: string[]; stylers: any }) => (
   <div className="px-4">
     <h2 className="text-lg font-light">Plugins</h2>
     <PluginLink

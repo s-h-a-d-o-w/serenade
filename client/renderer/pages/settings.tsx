@@ -11,12 +11,12 @@ import { Server } from "./settings/server";
 import { Advanced } from "./settings/advanced";
 import { Endpoint as EndpointType } from "shared/endpoint";
 
-const Section: React.FC<{
+const Section = ({ current, icon, page, title }: {
   current: string;
   icon: any;
   page: string;
   title: string;
-}> = ({ current, icon, page, title }) => {
+}) => {
   const showPage = (e: React.MouseEvent, page: string) => {
     e.preventDefault();
     ipcRenderer.send("setSettingsPage", page);
@@ -50,11 +50,11 @@ export const setValue = (key: string, e: any) => {
   ipcRenderer.send("setSettings", { [key]: value });
 };
 
-export const Row: React.FC<{
+export const Row = ({ title, subtitle, action }: {
   title: any;
   subtitle?: any;
   action: any;
-}> = ({ title, subtitle, action }) => (
+}) => (
   <div className="flex items-center border-b border-gray-200 py-2 dark:border-neutral-500">
     <div>
       <h2 className="block font-medium text-sm">{title}</h2>
@@ -64,12 +64,12 @@ export const Row: React.FC<{
   </div>
 );
 
-const SettingsPageComponent: React.FC<{
+const SettingsPageComponent = ({ endpoints, microphones, settingsPage }: {
   endpoint: EndpointType;
   endpoints: EndpointType[];
   microphones: any[];
   settingsPage: string;
-}> = ({ endpoints, microphones, settingsPage }) => {
+}) => {
   if (!endpoints || !endpoints.length || !microphones || !microphones.length) {
     return null;
   }

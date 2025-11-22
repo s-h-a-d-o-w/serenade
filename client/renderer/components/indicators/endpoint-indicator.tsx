@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloud, faLock } from "@fortawesome/free-solid-svg-icons";
 import { Endpoint } from "shared/endpoint";
 
-const EndpointIndicatorComponent: React.FC<{ endpoint: Endpoint }> = ({ endpoint }) => (
+const EndpointIndicatorComponent = ({ endpoint }: { endpoint: Endpoint }) => (
   <a
     href="#"
     className="inline-block text-slate-600 bg-gray-200 rounded text-xs px-1.5 py-0.5 mr-0.5 transition-colors hover:bg-gray-300 dark:bg-gray-600 dark:text-neutral-100 dark:hover:bg-gray-700"

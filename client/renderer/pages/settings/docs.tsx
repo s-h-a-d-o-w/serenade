@@ -3,11 +3,11 @@ import { ipcRenderer } from "electron";
 import { tutorials } from "shared/tutorial";
 import { Row } from "../settings";
 
-const DocsLink: React.FC<{
+const DocsLink = ({ title, subtitle, link }: {
   title: string;
   subtitle: string;
   link: string;
-}> = ({ title, subtitle, link }) => (
+}) => (
   <Row
     title={title}
     subtitle={subtitle}
@@ -19,11 +19,11 @@ const DocsLink: React.FC<{
   />
 );
 
-const TutorialLink: React.FC<{
+const TutorialLink = ({ title, subtitle, name }: {
   title: string;
   subtitle: string;
   name: string;
-}> = ({ title, subtitle, name }) => {
+}) => {
   const click = (e: React.MouseEvent) => {
     e.preventDefault();
     ipcRenderer.send("loadTutorial", { name });

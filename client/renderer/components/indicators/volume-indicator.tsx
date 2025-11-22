@@ -4,10 +4,10 @@ import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeDown, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
 
-const VolumeIndicatorComponent: React.FC<{
+const VolumeIndicatorComponent = ({ speaking, speakingVolume }: {
   speaking: boolean;
   speakingVolume: number;
-}> = ({ speaking, speakingVolume }) => {
+}) => {
   const low = 200;
   const high = 10000;
   const direction = speakingVolume > low ? "High" : "Low";

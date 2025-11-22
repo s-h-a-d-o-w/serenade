@@ -2,10 +2,10 @@ import React from "react";
 import classNames from "classnames";
 import { Switch } from "@headlessui/react";
 
-export const Toggle: React.FC<{
+export const Toggle = ({ onChange, value }: {
   onChange: (value: boolean) => void;
   value: boolean;
-}> = ({ onChange, value }) => (
+}) => (
   <Switch
     checked={value}
     onChange={onChange}

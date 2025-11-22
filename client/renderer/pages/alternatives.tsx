@@ -11,7 +11,7 @@ import { ModeIndicator } from "../components/indicators/mode-indicator";
 import { SettingsButton } from "../components/settings-button";
 import { VolumeIndicator } from "../components/indicators/volume-indicator";
 
-const AlternativesPageComponent: React.FC<{ miniMode: boolean }> = ({ miniMode }) => (
+const AlternativesPageComponent = ({ miniMode }: { miniMode: boolean }) => (
   <div className="overflow-hidden flex flex-col h-screen pt-[24px]">
     <div className="flex items-center justify-between select-none">
       <div className="flex items-center pl-1" style={{ minHeight: "30px" }}>

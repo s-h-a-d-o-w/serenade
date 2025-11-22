@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 import { ipcRenderer } from "electron";
 import { Spinner } from "./spinner";
 
-const ListenToggleComponent: React.FC<{
+const ListenToggleComponent = ({ darkTheme, listening, localLoading, volume }: {
   darkTheme: boolean;
   listening: boolean;
   localLoading: boolean;
   volume: number;
-}> = ({ darkTheme, listening, localLoading, volume }) => {
+}) => {
   const toggle = (e: React.MouseEvent) => {
     e.preventDefault();
     ipcRenderer.send("toggleChunkManager", !listening);

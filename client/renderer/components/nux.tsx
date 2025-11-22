@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 import { ipcRenderer } from "electron";
 import { Step } from "shared/tutorial";
 
-const NuxComponent: React.FC<{
+const NuxComponent = ({ miniMode, nuxHintShown, nuxNextButtonEnabled, nuxStep }: {
   miniMode: boolean;
   nuxHintShown: boolean;
   nuxNextButtonEnabled: boolean;
   nuxStep: Step;
-}> = ({ miniMode, nuxHintShown, nuxNextButtonEnabled, nuxStep }) => {
+}) => {
   const back = (e: React.MouseEvent) => {
     e.preventDefault();
     ipcRenderer.send("nuxBack");

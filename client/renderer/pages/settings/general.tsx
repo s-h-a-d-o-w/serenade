@@ -6,17 +6,7 @@ import { Row, setValue } from "../settings";
 import { Select } from "../../components/select";
 import { Toggle } from "../../components/toggle";
 
-const GeneralComponent: React.FC<{
-  darkMode: string;
-  microphones: any[];
-  miniMode: boolean;
-  miniModeFewerAlternativesCount: number;
-  miniModeHideTimeout: number;
-  pushToTalk: string;
-  useMiniModeFewerAlternatives: boolean;
-  useMiniModeHideTimeout: boolean;
-  volume: number;
-}> = ({
+const GeneralComponent = ({
   darkMode,
   microphones,
   miniMode,
@@ -26,6 +16,16 @@ const GeneralComponent: React.FC<{
   useMiniModeFewerAlternatives,
   useMiniModeHideTimeout,
   volume,
+}: {
+  darkMode: string;
+  microphones: any[];
+  miniMode: boolean;
+  miniModeFewerAlternativesCount: number;
+  miniModeHideTimeout: number;
+  pushToTalk: string;
+  useMiniModeFewerAlternatives: boolean;
+  useMiniModeHideTimeout: boolean;
+  volume: number;
 }) => {
   const metadata = new Metadata();
   const appearanceOptions = [

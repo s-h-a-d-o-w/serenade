@@ -39,7 +39,7 @@ export const updateMiniModeWindowHeight = () => {
   }
 };
 
-export const MiniModePage: React.FC = () => (
+export const MiniModePage = () => (
   <div id="mini-mode-page" className="h-screen w-screen overflow-x-hidden">
     <AlternativesList miniModePage={true} />
   </div>

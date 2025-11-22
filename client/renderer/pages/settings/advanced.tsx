@@ -5,21 +5,7 @@ import { Row, setValue } from "../settings";
 import { Select } from "../../components/select";
 import { Toggle } from "../../components/toggle";
 
-const AdvancedComponent: React.FC<{
-  animations: boolean;
-  clipboardInsert: boolean;
-  editorAutocomplete: boolean;
-  chunkSilenceThreshold: number;
-  chunkSpeechThreshold: number;
-  continueRunningInTray: boolean;
-  disableSuggestions: boolean;
-  executeSilenceThreshold: number;
-  minimizedPosition: string;
-  miniModeReversed: boolean;
-  showRevisionBox: any;
-  textInputKeybinding: string;
-  useVerboseLogging: boolean;
-}> = ({
+const AdvancedComponent = ({
   animations,
   clipboardInsert,
   editorAutocomplete,
@@ -33,6 +19,20 @@ const AdvancedComponent: React.FC<{
   showRevisionBox,
   textInputKeybinding,
   useVerboseLogging,
+}: {
+  animations: boolean;
+  clipboardInsert: boolean;
+  editorAutocomplete: boolean;
+  chunkSilenceThreshold: number;
+  chunkSpeechThreshold: number;
+  continueRunningInTray: boolean;
+  disableSuggestions: boolean;
+  executeSilenceThreshold: number;
+  minimizedPosition: string;
+  miniModeReversed: boolean;
+  showRevisionBox: any;
+  textInputKeybinding: string;
+  useVerboseLogging: boolean;
 }) => {
   const minimizedPositionOptions = [
     { id: "window", value: "Follow window" },

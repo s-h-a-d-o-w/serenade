@@ -18,7 +18,17 @@ import { isValidAlternative } from "shared/alternatives";
 import { tutorials } from "shared/tutorial";
 import reactStringReplace from "react-string-replace";
 
-const Alternative: React.FC<{
+const Alternative = ({
+  alternative,
+  index,
+  highlighted,
+  miniMode,
+  miniModeBottomUp,
+  miniModeReversed,
+  partial,
+  spinner,
+  truncate,
+}: {
   alternative: {
     description: string;
   };
@@ -30,16 +40,6 @@ const Alternative: React.FC<{
   partial: boolean;
   spinner: boolean;
   truncate: number;
-}> = ({
-  alternative,
-  index,
-  highlighted,
-  miniMode,
-  miniModeBottomUp,
-  miniModeReversed,
-  partial,
-  spinner,
-  truncate,
 }) => {
   const truncateText = (text: string, size: number) => {
     if (text.length <= size) {
@@ -202,22 +202,7 @@ const TutorialSelection = () => {
   );
 };
 
-const AlternativesListComponent: React.FC<{
-  alternatives: any;
-  alternativesSpinner: number[];
-  highlighted: number[];
-  loggedIn: boolean;
-  miniMode: boolean;
-  miniModeBottomUp: boolean;
-  miniModePage: boolean;
-  miniModeReversed: boolean;
-  nuxCompleted: boolean;
-  nuxTutorial: string;
-  partial: boolean;
-  scriptError: string;
-  suggestion: string;
-  updateNotification: string;
-}> = ({
+const AlternativesListComponent = ({
   alternatives,
   alternativesSpinner,
   highlighted,
@@ -232,6 +217,21 @@ const AlternativesListComponent: React.FC<{
   scriptError,
   suggestion,
   updateNotification,
+}: {
+  alternatives: any;
+  alternativesSpinner: number[];
+  highlighted: number[];
+  loggedIn: boolean;
+  miniMode: boolean;
+  miniModeBottomUp: boolean;
+  miniModePage: boolean;
+  miniModeReversed: boolean;
+  nuxCompleted: boolean;
+  nuxTutorial: string;
+  partial: boolean;
+  scriptError: string;
+  suggestion: string;
+  updateNotification: string;
 }) => {
   // update the minimode window height after each render
   if (miniModePage) {

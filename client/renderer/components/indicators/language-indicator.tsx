@@ -6,10 +6,10 @@ import { faFileAlt, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { languages } from "shared/languages";
 import { core } from "../../../gen/core";
 
-const LanguageIndicatorComponent: React.FC<{
+const LanguageIndicatorComponent = ({ language, sourceAvailable }: {
   language: core.Language;
   sourceAvailable: boolean;
-}> = ({ language, sourceAvailable }) => {
+}) => {
   let icon = <FontAwesomeIcon icon={faGlobe} />;
   let name = "Text";
   if (languages[language]) {

@@ -3,9 +3,9 @@ import { Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { Spinner } from "../components/spinner";
 
-const LoadingPageComponent: React.FC<{
-  loggedIn: boolean | undefined;
-}> = ({ loggedIn }) => {
+const LoadingPageComponent= ({ loggedIn }: {
+  loggedIn: boolean | undefined
+}) => {
   const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {

@@ -17,11 +17,9 @@ import { TextInputPage } from "./pages/text-input";
 import { WelcomePage } from "./pages/onboarding/welcome";
 import "./css/main.css";
 
-const AppComponent: React.FC<{
+const AppComponent = ({ darkTheme }: {
   darkTheme: boolean;
-  miniMode: boolean;
-  nuxCompleted: boolean;
-}> = ({ darkTheme }) => {
+}) => {
   const location = useLocation();
   // set this manually to always render a page for development
   let page = null;

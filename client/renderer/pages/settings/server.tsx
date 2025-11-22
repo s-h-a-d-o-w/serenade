@@ -7,16 +7,7 @@ import { Spinner } from "../../components/spinner";
 import { Toggle } from "../../components/toggle";
 import { Endpoint as EndpointType } from "shared/endpoint";
 
-const ServerComponent: React.FC<{
-  endpoint: EndpointType;
-  endpoints: EndpointType[];
-  latency: number;
-  localLoading: boolean;
-  logAudio: boolean;
-  logSource: boolean;
-  requiresNewerMac: boolean;
-  requiresWsl: boolean;
-}> = ({
+const ServerComponent = ({
   endpoint,
   endpoints,
   latency,
@@ -25,6 +16,15 @@ const ServerComponent: React.FC<{
   logSource,
   requiresNewerMac,
   requiresWsl,
+}: {
+  endpoint: EndpointType;
+  endpoints: EndpointType[];
+  latency: number;
+  localLoading: boolean;
+  logAudio: boolean;
+  logSource: boolean;
+  requiresNewerMac: boolean;
+  requiresWsl: boolean;
 }) => {
   const setEndpoint = (endpoint: string) => {
     ipcRenderer.send("setSettings", { endpoint });

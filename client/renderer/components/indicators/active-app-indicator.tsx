@@ -41,11 +41,11 @@ const apps: { [key: string]: { name: string; icon: string } } = {
   },
 };
 
-const ActiveAppIndicatorComponent: React.FC<{
+const ActiveAppIndicatorComponent = ({ app, pluginInstalled, customIcon }: {
   app: string;
   pluginInstalled: boolean;
   customIcon?: string;
-}> = ({ app, pluginInstalled, customIcon }) => {
+}) => {
   let name = app;
   if (Object.keys(apps).includes(app)) {
     name = apps[app].name;

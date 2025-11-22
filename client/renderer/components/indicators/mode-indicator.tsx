@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faICursor } from "@fortawesome/free-solid-svg-icons";
 
-const ModeIndicatorComponent: React.FC<{ dictateMode: boolean }> = ({ dictateMode }) => (
+const ModeIndicatorComponent = ({ dictateMode }: { dictateMode: boolean }) => (
   <a
     className={classNames(
       "inline-block text-slate-600 bg-gray-200 rounded text-xs px-1.5 py-0.5 mr-1 transition-colors hover:bg-gray-300 dark:bg-gray-600 dark:text-neutral-100 dark:hover:bg-gray-700",

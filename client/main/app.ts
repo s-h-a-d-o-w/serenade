@@ -302,15 +302,13 @@ export default class App {
     languageSwitcherWindow = instance.languageSwitcherWindow = LanguageSwitcherWindow.create(
       active,
       bridge,
-      mainWindow,
-      settings
+      mainWindow
     );
 
     log.verbose("create(): Creating text input window...");
     textInputWindow = instance.textInputWindow = TextInputWindow.create(
       bridge,
       mainWindow,
-      settings,
       system
     );
 

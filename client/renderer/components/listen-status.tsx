@@ -3,11 +3,11 @@ import classNames from "classnames";
 import { connect } from "react-redux";
 import { ipcRenderer } from "electron";
 
-const ListenStatusComponent: React.FC<{
+const ListenStatusComponent = ({ listening, localLoading, statusText }: {
   listening: boolean;
   localLoading: boolean;
   statusText: string;
-}> = ({ listening, localLoading, statusText }) => {
+}) => {
   const toggle = (e: React.MouseEvent) => {
     e.preventDefault();
     if (localLoading) {
