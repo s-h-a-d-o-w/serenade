@@ -3,6 +3,13 @@ import * as os from "os";
 import * as path from "path";
 import Settings from "./settings";
 
+function formatTime(time: number) {
+  const minutes = Math.floor(time / 60000);
+  const seconds = Math.floor((time % 60000) / 1000);
+  const milliseconds = time % 1000;
+  return `${minutes > 0 ? minutes + "m" : ""}${seconds > 0 ? seconds + "s" : ""}${milliseconds}ms`;
+}
+
 export default class Log {
   private errorStream?: fs.WriteStream;
   private verboseStream?: fs.WriteStream;
@@ -20,7 +27,9 @@ export default class Log {
   }
 
   verbose(message: string) {
-    const messageWithTime = this.startTime ? `${message} +${Date.now() - this.startTime}ms` : message;
+    const messageWithTime = this.startTime
+      ? `${message} +${formatTime(Date.now() - this.startTime)}`
+      : message;
     if(!import.meta.env.PROD) {
       console.log(messageWithTime);
     }

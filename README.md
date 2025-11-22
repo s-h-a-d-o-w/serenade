@@ -8,6 +8,9 @@
 
 ### Bugs
 - Invisible mini window (left of the main window when not using compact UI, might only be a problem on Windows) "removed"
+
+### Minor improvements
+- Improved theme (particularly dark mode)
 - Slightly faster startup time
 
 ### Dev changes
