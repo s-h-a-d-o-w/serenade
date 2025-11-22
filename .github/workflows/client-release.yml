@@ -1,0 +1,39 @@
+name: Client Release Build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-client:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+          cache-dependency-path: client/pnpm-lock.yaml
+
+      - name: Set environment variable
+        run: echo "SERENADE_SOURCE_ROOT=${{ github.workspace }}" >> $env:GITHUB_ENV
+
+      - name: Build in Docker container
+        run: |
+          docker compose -f config/docker-compose.yaml up -d
+          docker compose -f config/docker-compose.yaml exec -T serenade bash -c "gradle installd && gradle client:installServer"
+
+      # See https://www.electron.build/publish.html
+      - name: Release client
+        working-directory: client
+        env:
+          GH_TOKEN: ${{ secrets.CD_TOKEN }}
+        run: |
+          corepack enable pnpm
+          pnpm install
+          pnpm release

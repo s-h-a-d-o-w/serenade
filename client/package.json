@@ -23,7 +23,7 @@
     "dev": "pnpm run setup && run-p dev:renderer wait-on:renderer",
     "dev:renderer": "pnpm -F renderer dev",
     "install": "node --experimental-transform-types scripts/installCustomCommandsModules.ts",
-    "release": "npm-run-all build release:publish",
+    "release": "run-s build release:publish",
     "release:publish": "electron-builder --publish always",
     "setup": "rimraf out && pnpm check:core && pnpm build:customcommands",
     "start:electron": "cross-env ELECTRON_ENABLE_LOGGING=1 electron .",
@@ -89,11 +89,7 @@
         "serenade"
       ]
     },
-    "publish": {
-      "provider": "generic",
-      "url": "https://serenadecdn.com/app",
-      "useMultipleRangeRequest": false
-    }
+    "publish": "github"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
