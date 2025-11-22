@@ -1,4 +1,3 @@
-import React from "react";
 import { connect } from "react-redux";
 import { ListenStatus } from "../components/listen-status";
 import { ListenToggle } from "../components/listen-toggle";

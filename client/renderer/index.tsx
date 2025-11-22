@@ -1,4 +1,4 @@
-import React from "react";
+import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { HashRouter } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -7,13 +7,13 @@ import store from "./state/store";
 import * as events from "./events";
 
 ReactDOM.createRoot(document.getElementById("app")!).render(
-  <React.StrictMode>
+  <StrictMode>
     <Provider store={store}>
       <HashRouter>
         <App />
       </HashRouter>
     </Provider>
-  </React.StrictMode>
+  </StrictMode>
 );
 
 events.register();

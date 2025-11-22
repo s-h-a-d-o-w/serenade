@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import classNames from "classnames";
 import { connect } from "react-redux";
 import { ipcRenderer } from "electron";
@@ -13,7 +13,6 @@ import {
 import { updateMiniModeWindowHeight } from "../pages/mini-mode";
 import { NUX } from "./nux";
 import { Spinner } from "./spinner";
-import { UpdateNotification } from "./update-notification";
 import { isValidAlternative } from "shared/alternatives";
 import { tutorials } from "shared/tutorial";
 import reactStringReplace from "react-string-replace";
@@ -214,7 +213,6 @@ const AlternativesListComponent = ({
   partial,
   scriptError,
   suggestion,
-  updateNotification,
 }: {
   alternatives: any;
   alternativesSpinner: number[];
@@ -229,7 +227,6 @@ const AlternativesListComponent = ({
   partial: boolean;
   scriptError: string;
   suggestion: string;
-  updateNotification: string;
 }) => {
   // update the minimode window height after each render
   if (miniModePage) {
@@ -349,7 +346,6 @@ const AlternativesListComponent = ({
         "flex-col-reverse": miniMode && miniModeBottomUp && miniModeReversed,
       })}
     >
-      <UpdateNotification />
       {nuxCompleted && (suggestion || scriptError) ? suggestionSection : null}
       {!loggedIn || nuxCompleted ? null : !nuxTutorial ? <TutorialSelection /> : <NUX />}
       {examplesSection}
@@ -372,5 +368,4 @@ export const AlternativesList = connect((state: any) => ({
   partial: state.partial,
   scriptError: state.scriptError,
   suggestion: state.suggestion,
-  updateNotification: state.updateNotification,
 }))(AlternativesListComponent);

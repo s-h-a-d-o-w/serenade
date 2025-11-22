@@ -66,7 +66,6 @@ const initialState = {
   useMiniModeFewerAlternatives: false,
   useMiniModeHideTimeout: false,
   useVerboseLogging: false,
-  updateNotification: "",
   volume: 0,
 };
 

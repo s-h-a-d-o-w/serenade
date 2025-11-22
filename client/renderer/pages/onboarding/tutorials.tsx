@@ -1,4 +1,3 @@
-import React from "react";
 import { ipcRenderer } from "electron";
 import { Link } from "react-router-dom";
 import { tutorials } from "shared/tutorial";

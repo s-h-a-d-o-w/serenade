@@ -1,4 +1,3 @@
-import React from "react";
 import { ipcRenderer } from "electron";
 import { faUniversalAccess } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

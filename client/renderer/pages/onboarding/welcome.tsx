@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import wordmark from "../../../static/img/wordmark.svg";
 import onboardingWelcome from "../../../static/img/onboarding-welcome.png";

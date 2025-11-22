@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import store from "../state/store";
 import { ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/outline";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import classNames from "classnames";
 import { connect } from "react-redux";
 import { ipcRenderer } from "electron";

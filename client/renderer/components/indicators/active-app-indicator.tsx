@@ -1,4 +1,3 @@
-import React from "react";
 import { connect } from "react-redux";
 import { plugins } from "shared/plugins";
 import icon from "../../../static/img/icon.png";
