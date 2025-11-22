@@ -9,6 +9,7 @@ import Window from "./window";
 export default class RevisionBoxWindow extends Window {
   private promises: any = {};
   private previousApplication: string = "";
+  private previousClipboardContents: string = "";
 
   constructor(
     private mainWindow: MainWindow,
@@ -56,7 +57,7 @@ export default class RevisionBoxWindow extends Window {
     if (this.previousApplication) {
       await this.system.focus(this.previousApplication);
 
-      if (action == "send" || action == "close") {
+      if (action === "send" || action === "close") {
         if (state.source) {
           await this.system.paste(this.previousApplication);
         } else {
@@ -66,6 +67,10 @@ export default class RevisionBoxWindow extends Window {
         if (action == "send") {
           await this.system.pressKey("enter");
         }
+      }
+
+      if (action === "cancel") {
+        this.system.setClipboard(this.previousClipboardContents);
       }
     }
   }
@@ -134,6 +139,7 @@ export default class RevisionBoxWindow extends Window {
     const app = await this.system.determineActiveApplication();
     const active = app.split(" ");
     this.previousApplication = active[active.length - 1];
+    this.previousClipboardContents = this.system.getClipboard();
 
     let source = "";
     if (action == "clipboard") {

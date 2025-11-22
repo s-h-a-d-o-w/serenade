@@ -12,7 +12,8 @@
 - Fixed position drift of settings and dictation box windows
 
 ### Minor improvements
-- RevisionBox: Don't revert clipboard after closing (This solves the problem where the dictated text is lost when returning the focus to the correct app doesn't work.)
+- RevisionBox: Doesn't revert clipboard after closing. (This solves the problem where the dictated text is lost when returning the focus to the correct app doesn't work.)
+- RevisionBox: Retains previous clipboard content on "cancel"
 - Improved theme (particularly dark mode)
 - Slightly faster startup time
 
