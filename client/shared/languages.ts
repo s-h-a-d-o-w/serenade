@@ -70,7 +70,7 @@ export const languages: { [key in core.Language]?: LanguageConfiguration } = {
     styler: core.StylerType.STYLER_TYPE_PRETTIER,
   },
   [core.Language.LANGUAGE_JAVASCRIPT]: {
-    extensions: ["js", "jsx", "ts", "tsx", "typescript"],
+    extensions: ["js", "jsx", "ts", "tsx", "typescript", "mjs", "cjs", "mts", "cts", "astro", "svelte", "vue"],
     icon: javascript,
     name: "JavaScript",
     styler: core.StylerType.STYLER_TYPE_PRETTIER,
