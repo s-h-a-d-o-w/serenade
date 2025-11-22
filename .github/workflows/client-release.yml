@@ -13,6 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Enable pnpm
+        run: |
+          corepack enable pnpm
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -34,6 +37,5 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.CD_TOKEN }}
         run: |
-          corepack enable pnpm
           pnpm install
           pnpm release
