@@ -55,9 +55,9 @@ const ActiveAppIndicatorComponent = ({ app, pluginInstalled, customIcon }: {
 
   const icon = customIcon || (Object.keys(apps).includes(app) ? apps[app].icon : windowIcon);
   return (
-    <div className="block text-xs px-1.5 py-0.5 ">
+    <div className="flex items-center gap-1 text-xs whitespace-nowrap">
       <img
-        className="w-4 h-4 inline-block mr-1"
+        className="w-4 h-4"
         src={icon}
         alt={name}
         style={{ marginTop: "-2px" }}

@@ -1,24 +1,21 @@
 import React from "react";
-import classNames from "classnames";
 import { ipcRenderer } from "electron";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faICursor } from "@fortawesome/free-solid-svg-icons";
+import { Indicator } from "./indicator";
+import classNames from "classnames";
 
 const ModeIndicatorComponent = ({ dictateMode }: { dictateMode: boolean }) => (
-  <a
-    className={classNames(
-      "inline-block text-slate-600 bg-gray-200 rounded text-xs px-1.5 py-0.5 mr-1 transition-colors hover:bg-gray-300 dark:bg-gray-600 dark:text-neutral-100 dark:hover:bg-gray-700",
-      { hidden: !dictateMode }
-    )}
-    href="#"
+  <Indicator
+    className={classNames({ "hidden": !dictateMode })}
     onClick={(e: React.MouseEvent) => {
       e.preventDefault();
       ipcRenderer.send("toggleDictateMode");
     }}
   >
-    <FontAwesomeIcon icon={faICursor} /> Dictate
-  </a>
+    <FontAwesomeIcon icon={faICursor} /> {dictateMode ? "Dictate" : "Listen"}
+  </Indicator>
 );
 
 export const ModeIndicator = connect((state: any) => ({

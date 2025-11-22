@@ -26,15 +26,10 @@ const AlternativesPageComponent = ({ miniMode }: { miniMode: boolean }) => (
     </div>
     {miniMode ? null : <AlternativesList miniModePage={false} />}
     <div
-      className="status-indicators flex border-t border-gray-200 mt-1.5 dark:border-neutral-600"
-      style={{
-        padding: "2px 3px",
-      }}
+      className="status-indicators py-1 px-1 flex items-center justify-between border-t border-gray-200 mt-1.5 dark:border-neutral-600"
     >
-      <div className="flex">
-        <ActiveAppIndicator />
-      </div>
-      <div className="flex ml-auto">
+      <ActiveAppIndicator />
+      <div className="flex flex-wrap justify-end gap-1">
         <ModeIndicator />
         <LanguageIndicator />
         <EndpointIndicator />
