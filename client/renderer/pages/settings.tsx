@@ -69,12 +69,11 @@ const SettingsPageComponent: React.FC<{
   endpoints: EndpointType[];
   microphones: any[];
   settingsPage: string;
-}> = ({ endpoint, endpoints, microphones, settingsPage }) => {
+}> = ({ endpoints, microphones, settingsPage }) => {
   if (!endpoints || !endpoints.length || !microphones || !microphones.length) {
     return null;
   }
 
-  const microphone = microphones.filter((e) => e.selected)[0];
   return (
     <div className="pt-[24px] h-screen flex flex-col">
       <div className="flex w-full justify-around px-4 mb-2">

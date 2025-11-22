@@ -138,7 +138,7 @@ class RevisionBoxDiff implements Command {
     });
   }
 
-  undo(state: core.IEditorState): Operation {
+  undo(): Operation {
     return new KeylessOperation(() => {
       this.revisionBoxWindow.setEditorState({
         source: this.beforeState!.source!.toString(),
@@ -199,15 +199,15 @@ class Insert implements Command {
     this.text = text;
   }
 
-  apply(state: core.IEditorState): Operation {
+  apply(): Operation {
     return new TypeText(this.active, this.insertHistory, this.system, this.text);
   }
 
-  undo(state: core.IEditorState): Operation {
+  undo(): Operation {
     return new PressKey(this.system, "backspace", [], this.text.length);
   }
 
-  hasExpectedUndoSource(state: core.IEditorState): boolean {
+  hasExpectedUndoSource(): boolean {
     return true;
   }
 }
@@ -362,9 +362,9 @@ export default class NativeCommands {
       .keystrokesCount();
   }
 
-  insertKeystrokesCount(state: core.IEditorState, text: string) {
+  insertKeystrokesCount(text: string) {
     return new Insert(this.active, this.insertHistory, this.system, text)
-      .apply(state)
+      .apply()
       .keystrokesCount();
   }
 

@@ -158,7 +158,7 @@ export default class App {
     const stream = (instance.stream = new Stream(active, api, log, settings));
 
     log.verbose("create(): Creating local...");
-    const local = (instance.local = new Local(bridge, log, mainWindow, metadata, settings));
+    const local = (instance.local = new Local(bridge, log, mainWindow, settings));
 
     log.verbose("create(): Creating nux...");
     const nux = new NUX(

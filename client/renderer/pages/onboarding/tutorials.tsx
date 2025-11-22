@@ -5,7 +5,7 @@ import { tutorials } from "shared/tutorial";
 import onboardingTutorials from "../../../static/img/onboarding-tutorials.svg";
 
 export const TutorialsPage = () => {
-  const click = (e: React.MouseEvent, name: string) => {
+  const handleClick = (name: string) => {
     ipcRenderer.send("generateToken");
     ipcRenderer.send("loadTutorial", { name, resize: true });
   };
@@ -28,7 +28,7 @@ export const TutorialsPage = () => {
                   <Link
                     to="/alternatives"
                     className="primary-button block"
-                    onClick={(e) => click(e, tutorial.tutorial)}
+                    onClick={() => handleClick(tutorial.tutorial)}
                     key={tutorial.tutorial}
                   >
                     {tutorial.title.replace("Basics", "")}

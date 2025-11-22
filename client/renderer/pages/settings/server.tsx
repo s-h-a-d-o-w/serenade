@@ -11,8 +11,6 @@ const ServerComponent: React.FC<{
   endpoint: EndpointType;
   endpoints: EndpointType[];
   latency: number;
-  loadingPageMessage: string;
-  loadingPageProgress: number;
   localLoading: boolean;
   logAudio: boolean;
   logSource: boolean;
@@ -22,8 +20,6 @@ const ServerComponent: React.FC<{
   endpoint,
   endpoints,
   latency,
-  loadingPageMessage,
-  loadingPageProgress,
   localLoading,
   logAudio,
   logSource,
@@ -128,8 +124,6 @@ export const Server = connect((state: any) => ({
   endpoints: state.endpoints,
   latency: state.latency,
   localLoading: state.localLoading,
-  loadingPageMessage: state.loadingPageMessage,
-  loadingPageProgress: state.loadingPageProgress,
   localVersion: state.localVersion,
   logAudio: state.logAudio,
   logSource: state.logSource,

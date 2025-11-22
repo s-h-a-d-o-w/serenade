@@ -66,7 +66,7 @@ export const Docs = () => (
       link="https://serenade.ai/docs/api"
     />
     <h2 className="text-lg font-light mt-4">Tutorials</h2>
-    {tutorials.map((e, i) => (
+    {tutorials.map((e) => (
       <TutorialLink title={e.title} subtitle={e.description} name={e.tutorial} key={e.tutorial} />
     ))}
   </div>

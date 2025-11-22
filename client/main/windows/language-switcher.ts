@@ -1,7 +1,6 @@
 import Active from "../active";
 import MainWindow from "./main";
 import RendererBridge from "../bridge";
-import Settings from "../settings";
 import Window from "./window";
 
 export default class LanguageSwitcherWindow extends Window {
@@ -17,10 +16,9 @@ export default class LanguageSwitcherWindow extends Window {
     active: Active,
     bridge: RendererBridge,
     mainWindow: MainWindow,
-    settings: Settings
   ): Promise<LanguageSwitcherWindow> {
     const instance = new LanguageSwitcherWindow(active, bridge, mainWindow);
-    await instance.createWindow(bridge, settings);
+    await instance.createWindow(bridge);
     return instance;
   }
 

@@ -7,7 +7,7 @@ import onboardingPlugins from "../../../static/img/onboarding-plugins.svg";
 export const PluginsPage = () => {
   const [disabled, setDisabled] = useState(true);
 
-  const onClick = (e: React.MouseEvent) => {
+  const onClick = () => {
     setDisabled(false);
   };
 

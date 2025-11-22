@@ -1,7 +1,6 @@
 import { screen } from "electron";
 import Bridge from "../bridge";
 import MainWindow from "./main";
-import Settings from "../settings";
 import System from "../execute/system";
 import Window from "./window";
 
@@ -10,23 +9,22 @@ export default class TextInputWindow extends Window {
   private x?: number;
   private y?: number;
 
-  constructor(private mainWindow: MainWindow, private settings: Settings, private system: System) {
+  constructor(private mainWindow: MainWindow, private system: System) {
     super();
   }
 
   static async create(
     bridge: Bridge,
     mainWindow: MainWindow,
-    settings: Settings,
     system: System
   ): Promise<TextInputWindow> {
-    const instance = new TextInputWindow(mainWindow, settings, system);
-    await instance.createWindow(bridge, settings);
+    const instance = new TextInputWindow(mainWindow, system);
+    await instance.createWindow(bridge);
     return instance;
   }
 
-  async createWindow(bridge: Bridge, settings: Settings) {
-    super.createWindow(bridge, settings);
+  async createWindow(bridge: Bridge) {
+    super.createWindow(bridge);
 
     if (this.window?.setWindowButtonVisibility) {
       this.window?.setWindowButtonVisibility(false);

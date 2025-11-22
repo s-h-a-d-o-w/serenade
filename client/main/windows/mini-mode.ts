@@ -32,12 +32,12 @@ export default class MiniModeWindow extends Window {
     settings: Settings
   ): Promise<MiniModeWindow> {
     const instance = new MiniModeWindow(bridge, mainWindow, settings);
-    await instance.createWindow(bridge, settings);
+    await instance.createWindow(bridge);
     return instance;
   }
 
-  async createWindow(bridge: RendererBridge, settings: Settings) {
-    super.createWindow(bridge, settings);
+  async createWindow(bridge: RendererBridge) {
+    super.createWindow(bridge);
 
     if (this.window?.setWindowButtonVisibility) {
       this.window?.setWindowButtonVisibility(false);

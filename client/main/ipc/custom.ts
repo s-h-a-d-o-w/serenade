@@ -4,7 +4,6 @@ import * as fs from "fs-extra";
 import os from "os";
 import path from "path";
 import Settings from "../settings";
-import Log from "../log";
 
 export default class Custom {
   private defaultCustomCommandsFile: string = `/* Serenade Custom Commands

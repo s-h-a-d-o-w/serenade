@@ -21,7 +21,7 @@ const AppComponent: React.FC<{
   darkTheme: boolean;
   miniMode: boolean;
   nuxCompleted: boolean;
-}> = ({ darkTheme, miniMode, nuxCompleted }) => {
+}> = ({ darkTheme }) => {
   const location = useLocation();
   // set this manually to always render a page for development
   let page = null;

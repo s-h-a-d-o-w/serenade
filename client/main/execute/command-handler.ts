@@ -44,7 +44,6 @@ export default class CommandHandler {
   }
 
   async COMMAND_TYPE_CALLBACK(data: core.ICommand): Promise<any> {
-    const command = this.active.customCommands.filter((e: any) => e.templated == data.path)[0];
     const state = await this.active.getEditorState();
     state.source = Buffer.from(data.source || "");
     state.cursor = data.cursor || 0;

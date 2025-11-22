@@ -67,7 +67,7 @@ export default class RendererProcessEventHandlers {
       this.pluginManager.sendResponseToApp(this.active.app, data);
     });
 
-    ipcMain.on("generateToken", (_event: any, data: any) => {
+    ipcMain.on("generateToken", () => {
       this.settings.setToken(uuid());
     });
 

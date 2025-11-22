@@ -29,8 +29,6 @@ const initialState = {
   latency: 1,
   listening: false,
   loading: {},
-  loadingPageProgress: 0,
-  loadingPageMessage: "",
   localLoading: false,
   localVersion: undefined,
   logAudio: true,

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import classNames from "classnames";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/24/solid";
@@ -36,7 +36,7 @@ export const Select: React.FC<{
                   })
                 }
               >
-                {({ selected, active }) => (
+                {({ selected }) => (
                   <>
                     <span
                       className={classNames("block", {

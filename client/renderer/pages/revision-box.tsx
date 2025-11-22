@@ -164,10 +164,10 @@ export const RevisionBoxPageComponent: React.FC<{
               onClick={(e) => {
                 e.preventDefault();
               }}
-              onMouseOver={(e) => {
+              onMouseOver={() => {
                 setHelpShown(true);
               }}
-              onMouseOut={(e) => {
+              onMouseOut={() => {
                 setHelpShown(false);
               }}
             >

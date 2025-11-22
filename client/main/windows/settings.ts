@@ -36,7 +36,7 @@ export default class SettingsWindow extends Window {
       miniModeWindow,
       settings
     );
-    await instance.createWindow(bridge, settings);
+    await instance.createWindow(bridge);
     return instance;
   }
 

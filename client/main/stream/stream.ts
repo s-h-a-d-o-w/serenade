@@ -60,7 +60,7 @@ export default class Stream {
       return Promise.resolve(true);
     }
 
-    return new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve) => {
       this.coreSocket = new WebSocket(
         `${
           (process.env.ENDPOINT && process.env.ENDPOINT.startsWith("https")) ||

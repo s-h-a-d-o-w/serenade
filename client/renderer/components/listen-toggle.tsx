@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import classNames from "classnames";
 import { connect } from "react-redux";
 import { ipcRenderer } from "electron";

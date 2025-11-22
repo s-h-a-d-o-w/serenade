@@ -49,7 +49,7 @@ export default class MainWindow extends Window {
       miniModeWindow,
       windowsToDestroy
     );
-    await instance.createWindow(bridge, settings);
+    await instance.createWindow(bridge);
     return instance;
   }
 
@@ -144,9 +144,9 @@ export default class MainWindow extends Window {
     );
   }
 
-  async createWindow(bridge: RendererBridge, settings: Settings) {
+  async createWindow(bridge: RendererBridge) {
     this.createMenu();
-    await super.createWindow(bridge, settings);
+    await super.createWindow(bridge);
     this.resizeToCurrentMode();
 
     this.window?.on("close", async (e: Event) => {

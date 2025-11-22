@@ -4,11 +4,11 @@ import { updateMiniModeWindowHeight } from "./pages/mini-mode";
 import store from "./state/store";
 
 export const register = () => {
-  ipcRenderer.on("focusRevisionBox", (_event: any, data: any) => {
+  ipcRenderer.on("focusRevisionBox", () => {
     revisionBox.focus();
   });
 
-  ipcRenderer.on("focusTextInput", (_event: any, _data: any) => {
+  ipcRenderer.on("focusTextInput", () => {
     const input: any = document.getElementById("text-input");
     if (!input) {
       return;
@@ -47,7 +47,7 @@ export const register = () => {
     history.pushState(data.url, "Serenade");
   });
 
-  ipcRenderer.on("updateMiniModeWindowHeight", (_event: any, _data: any) => {
+  ipcRenderer.on("updateMiniModeWindowHeight", () => {
     updateMiniModeWindowHeight();
   });
 };

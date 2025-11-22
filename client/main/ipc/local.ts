@@ -5,7 +5,6 @@ import { fetchWithTimeout } from "../utils/fetchWithTimeout";
 import * as semver from "semver";
 import Log from "../log";
 import MainWindow from "../windows/main";
-import Metadata from "shared/metadata";
 import RendererBridge from "../bridge";
 import Settings from "../settings";
 import { type ChildProcess, spawnSync } from "child_process";
@@ -24,7 +23,6 @@ export default class Local {
     private bridge: RendererBridge,
     private log: Log,
     private mainWindow: MainWindow,
-    private metadata: Metadata,
     private settings: Settings
   ) {}
 

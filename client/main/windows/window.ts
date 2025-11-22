@@ -3,7 +3,6 @@ import os from "os";
 import path from "path";
 import MainWindow from "./main";
 import RendererBridge from "../bridge";
-import Settings from "../settings";
 import { format as formatUrl } from "url";
 
 export default abstract class Window {
@@ -14,7 +13,7 @@ export default abstract class Window {
   abstract title(): string;
   abstract url(): string;
 
-  async createWindow(bridge: RendererBridge, settings: Settings): Promise<void> {
+  async createWindow(bridge: RendererBridge): Promise<void> {
     return new Promise((resolve) => {
       let icon = "icon_512x512.png";
       if (os.platform() == "win32") {
@@ -53,7 +52,7 @@ export default abstract class Window {
       this.window.setAutoHideMenuBar(true);
       this.window.setAlwaysOnTop(true);
       if (!this.main()) {
-        this.window.on("close", (e: any) => {
+        this.window.on("close", (e) => {
           e.preventDefault();
           this.hide();
         });
@@ -157,7 +156,7 @@ export default abstract class Window {
     return { x, y };
   }
 
-  send(message: string, data: any) {
+  send(message: string, data: unknown) {
     try {
       this.window?.webContents.send(message, data);
     } catch (e) {}

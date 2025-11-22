@@ -62,7 +62,6 @@ export default class Active {
     command: any,
     app: string,
     filename: string,
-    language: core.Language,
     url: string
   ): boolean {
     const applications = command.applications || [];
@@ -182,7 +181,7 @@ export default class Active {
 
     let customWords = await this.settings.getCustomWords();
     const customWordsFromScripts = this.customWords.filter((e: any) =>
-      this.customCommandMatches(e, this.app, this.filename, this.language, url)
+      this.customCommandMatches(e, this.app, this.filename, url)
     );
 
     for (const word of Object.values(customWordsFromScripts)) {
@@ -213,7 +212,7 @@ export default class Active {
         this.customHints
           .filter(
             (e: any) =>
-              e.hint && this.customCommandMatches(e, this.app, this.filename, this.language, url)
+              e.hint && this.customCommandMatches(e, this.app, this.filename, url)
           )
           .map((e: any) => e.hint)
       ),
@@ -247,7 +246,7 @@ export default class Active {
     }
 
     result.customCommands = this.customCommands
-      .filter((e: any) => this.customCommandMatches(e, this.app, this.filename, this.language, url))
+      .filter((e: any) => this.customCommandMatches(e, this.app, this.filename, url))
       .map((e: any) => {
         let chainable = core.CustomCommandChainable.CUSTOM_COMMAND_CHAINABLE_NONE;
         if (e.chainable == "any" || e.chainable === true) {
