@@ -174,11 +174,13 @@ export default abstract class Window {
 
   show() {
     const position = this.position();
-    let bounds = this.window!.getBounds();
-    bounds.x = position.x;
-    bounds.y = position.y;
+    this.window!.setBounds({
+      x: position.x,
+      y: position.y,
+      width: this.width(),
+      height: this.height()
+    });
 
-    this.window!.setBounds(bounds);
     this.window!.show();
     this.window!.focus();
     this.isShown = true;
