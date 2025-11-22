@@ -1,7 +1,8 @@
 import * as os from "os";
+import packageJson from "../package.json";
 
 export default class Metadata {
-  version = "2.0.4";
+  version = packageJson.version;
 
   identifier(application: string, language: any): string {
     return JSON.stringify({

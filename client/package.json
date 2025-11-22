@@ -1,10 +1,14 @@
 {
   "name": "Serenade",
   "productName": "Serenade",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "type": "module",
   "author": "s-h-a-d-o-w",
   "description": "Code with voice. Learn more at https://serenade.ai",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/s-h-a-d-o-w/serenade.git"
+  },
   "license": "MIT",
   "private": true,
   "engines": {
@@ -18,13 +22,13 @@
     "build:renderer": "pnpm -F renderer build",
     "build:customcommands": "node --experimental-transform-types scripts/buildCustomCommands.ts",
     "bundle": "rimraf dist && pnpm build && electron-builder",
-    "bundle:unsigned": "pnpm build && cross-env SKIP_SIGN=1 electron-builder -c.mac.identity=null",
+    "bundle:unsigned": "pnpm build && cross-env SKIP_NOTARIZE=1 electron-builder -c.mac.identity=null",
     "check:core": "node --experimental-transform-types scripts/checkCore.ts",
     "dev": "pnpm run setup && run-p dev:renderer wait-on:renderer",
     "dev:renderer": "pnpm -F renderer dev",
     "install": "node --experimental-transform-types scripts/installCustomCommandsModules.ts",
-    "release": "run-s build release:publish",
-    "release:publish": "electron-builder --publish always",
+    "release": "pnpm build && pnpm electron-builder --publish always",
+    "release:unsigned": "pnpm build && cross-env SKIP_NOTARIZE=1 pnpm electron-builder -c.mac.identity=null --publish always",
     "setup": "rimraf out && pnpm check:core && pnpm build:customcommands",
     "start:electron": "cross-env ELECTRON_ENABLE_LOGGING=1 electron .",
     "typecheck": "tsc --noEmit",

@@ -6,16 +6,59 @@ on:
       - master
 
 jobs:
-  build-client:
-    runs-on: windows-latest
+  fetch-local-server:
+    runs-on: ubuntu-latest
 
     steps:
+      - name: Download latest local server artifact
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          owner_repo="${GITHUB_REPOSITORY}"
+          api="https://api.github.com/repos/$owner_repo/actions/artifacts?per_page=100"
+          artifact_id=$(curl -sSL -H "Authorization: Bearer $GITHUB_TOKEN" -H "Accept: application/vnd.github+json" "$api" | jq '.artifacts | map(select(.name=="serenade-local-server" and .expired==false)) | sort_by(.created_at) | last | .id')
+          if [ -z "${artifact_id:-}" ] || [ "$artifact_id" = "null" ]; then
+            echo "No serenade-local-server artifact found"
+            exit 1
+          fi
+          curl -sSL -L -H "Authorization: Bearer $GITHUB_TOKEN" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/$owner_repo/actions/artifacts/$artifact_id/zip" -o local-server.zip
+          mkdir work
+          cd work
+          unzip ../local-server.zip
+      - name: Re-upload local server artifact for this workflow
+        uses: actions/upload-artifact@v4
+        with:
+          name: serenade-local-server-latest
+          path: work
+
+  build-client:
+    runs-on: ${{ matrix.os }}
+    needs: fetch-local-server
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - name: Install X11 development libraries
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update && sudo apt-get install -y libx11-dev libxtst-dev
+
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Enable pnpm
-        run: |
-          corepack enable pnpm
+      - name: Download local server artifacts
+        uses: actions/download-artifact@v5
+        with:
+          name: serenade-local-server-latest
+          path: client/static/local
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: client/package.json
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -23,19 +66,17 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: client/pnpm-lock.yaml
 
-      - name: Set environment variable
-        run: echo "SERENADE_SOURCE_ROOT=${{ github.workspace }}" >> $env:GITHUB_ENV
+      - name: Cache npm dependencies
+        if: matrix.os != 'macos-latest'
+        uses: actions/cache@v4
+        with:
+          path: client/static/custom-commands-server/node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('client/static/custom-commands-server/package-lock.json') }}
 
-      - name: Build in Docker container
-        run: |
-          docker compose -f config/docker-compose.yaml up -d
-          docker compose -f config/docker-compose.yaml exec -T serenade bash -c "gradle installd && gradle client:installServer"
-
-      # See https://www.electron.build/publish.html
       - name: Release client
         working-directory: client
         env:
           GH_TOKEN: ${{ secrets.CD_TOKEN }}
         run: |
           pnpm install
-          pnpm release
+          ${{ matrix.os == 'macos-latest' && 'pnpm release:unsigned' || 'pnpm release' }}

@@ -7,7 +7,7 @@ dotenv.config();
 
 export default async function notarizing(context) {
   const { electronPlatformName, appOutDir } = context;
-  if (process.env.SKIP_SIGN || electronPlatformName !== "darwin") {
+  if (process.env.SKIP_NOTARIZE || electronPlatformName !== "darwin") {
     return;
   }
 
