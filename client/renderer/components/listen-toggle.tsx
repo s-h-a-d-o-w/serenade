@@ -15,11 +15,11 @@ const ListenToggleComponent = ({ darkTheme, listening, localLoading, volume }: {
     ipcRenderer.send("toggleChunkManager", !listening);
   };
 
-  const color = 210 - 70 * (listening ? volume : 0);
+  const color = (darkTheme ? 180: 210) - 150 * (listening ? volume : 0);
   const borderPadding = 6;
   const width = 52;
   const height = 24;
-  const offset = -4;
+  const offset = -8;
   return (
     <>
       <div
@@ -51,14 +51,14 @@ const ListenToggleComponent = ({ darkTheme, listening, localLoading, volume }: {
           <div
             className="absolute"
             style={{
-              background: listening ? `rgb(255, ${color}, ${color})` : "white",
+              background: listening ? `rgb(${darkTheme ? 245 : 255}, ${color}, ${color})` : "white",
               zIndex: 4,
               top: -offset / 2 + "px",
               left: listening ? width - height - offset / 2 + "px" : -offset / 2 + "px",
               width: height + offset + "px",
               height: height + offset + "px",
               borderRadius: height + "px",
-              boxShadow: "0 0 4px #333",
+              boxShadow: darkTheme ? "0 0 4px #333" : "0 0 4px #777",
               transition:
                 "background 0.3s ease-in-out, box-shadow 0.3s ease-in-out, left 0.3s ease-in-out",
             }}

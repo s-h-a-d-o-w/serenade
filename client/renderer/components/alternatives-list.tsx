@@ -86,15 +86,17 @@ const Alternative = ({
     wrappedDescription,
     /<code>([\s\S]*?)<\/code>/g,
     (m: string, i: any) => {
+      const colorClasses = {
+        "bg-blue-600 group-hover:bg-blue-700 dark:bg-blue-600 dark:group-hover:bg-blue-700": usable,
+        "bg-blue-500 dark:bg-blue-600": unusable,
+        "bg-violet-700 dark:bg-violet-900": highlighted,
+      }
+
       if (m.includes("\n") || m.length > 25 || newline) {
         newline = true;
         return (
           <div
-            className={classNames("rounded px-2 py-1 mt-1", {
-              "bg-blue-600 group-hover:bg-blue-700 dark:bg-indigo-800 dark:group-hover:bg-indigo-900": usable,
-              "bg-blue-500 dark:bg-indigo-600": unusable,
-              "bg-violet-700 dark:bg-violet-900": highlighted,
-            })}
+            className={classNames("rounded px-2 py-1 mt-1", colorClasses)}
             key={i}
           >
             <pre className="whitespace-pre-wrap" style={{ wordBreak: "break-word" }}>
@@ -110,11 +112,7 @@ const Alternative = ({
 
       return (
         <pre
-          className={classNames("inline rounded px-1 py-0.5 whitespace-pre-wrap", {
-            "bg-blue-600 group-hover:bg-blue-700 dark:bg-indigo-800 dark:group-hover:bg-indigo-900": usable,
-            "bg-blue-500 dark:bg-indigo-600": unusable,
-            "bg-violet-700 dark:bg-violet-900": highlighted,
-          })}
+          className={classNames("inline rounded px-1 py-0.5 whitespace-pre-wrap", colorClasses)}
           key={i}
         >
           {m}
@@ -133,8 +131,8 @@ const Alternative = ({
       className={classNames(
         "alternative-row block flex items-center text-white p-2 rounded-md transition-colors group",
         {
-          "bg-blue-500 hover:bg-blue-600 dark:bg-indigo-700 dark:hover:bg-indigo-800 cursor-pointer": usable,
-          "bg-blue-400 dark:bg-indigo-500 cursor-default": unusable,
+          "bg-blue-500 hover:bg-blue-600 dark:bg-blue-500 dark:hover:bg-blue-600 cursor-pointer": usable,
+          "bg-blue-400 dark:bg-blue-500 cursor-default": unusable,
           "bg-violet-500 dark:bg-violet-700 cursor-default": highlighted,
           "mb-1 mx-1 shadow": !miniMode,
           "mt-1": index > 1 || (miniMode && miniModeBottomUp && miniModeReversed),
@@ -146,8 +144,8 @@ const Alternative = ({
           className={classNames(
             "rounded-full font-bold h-[22px] w-[22px] m-[3px] flex justify-center items-center",
             {
-              "bg-blue-600 group-hover:bg-blue-700 dark:bg-blue-800 dark:group-hover:bg-blue-900": usable,
-              "text-xs bg-blue-500 dark:bg-indigo-600": unusable,
+              "bg-blue-600 group-hover:bg-blue-700 dark:bg-blue-600 dark:group-hover:bg-blue-700": usable,
+              "text-xs bg-blue-500 dark:bg-blue-600": unusable,
               "text-xs bg-violet-700 dark:bg-violet-900": highlighted,
             }
           )}
@@ -255,7 +253,7 @@ const AlternativesListComponent = ({
     .map((e: any, i: number) => (
       <div
         key={i}
-        className="bg-blue-400 text-white m-0.5 mx-1 px-2 py-3 rounded-md shadow dark:bg-blue-700"
+        className="bg-blue-400 text-white m-0.5 mx-1 px-2 py-3 rounded-md shadow dark:bg-blue-500"
         style={{
           fontSize: "0.9rem",
           lineHeight: "1.2rem",
@@ -343,28 +341,20 @@ const AlternativesListComponent = ({
     </div>
   );
 
-  // these spacer elements exist to avoid the rounded window border on mac, which we can't change
-  const spacer =
-    alternatives.length > 0 || suggestion || scriptError || nuxTutorial || updateNotification ? (
-      <div className="spacer w-full h-[5px]" />
-    ) : null;
-
   return (
     <div
-      className={classNames("flex overflow-y-auto", {
+      className={classNames("flex overflow-y-auto py-1", {
         "flex-1": !miniMode,
         "flex-col": !miniMode || !miniModeBottomUp || !miniModeReversed,
         "flex-col-reverse": miniMode && miniModeBottomUp && miniModeReversed,
       })}
     >
-      {spacer}
       <UpdateNotification />
       {nuxCompleted && (suggestion || scriptError) ? suggestionSection : null}
       {!loggedIn || nuxCompleted ? null : !nuxTutorial ? <TutorialSelection /> : <NUX />}
       {examplesSection}
       {validSection}
       {invalidSection}
-      {spacer}
     </div>
   );
 };

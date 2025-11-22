@@ -85,7 +85,7 @@ const GeneralComponent = ({
         action={
           <input
             type="text"
-            className="input w-32 py-1"
+            className="input w-32 py-1 dark:text-white"
             defaultValue={pushToTalk}
             onChange={(e) => setValue("pushToTalk", e)}
           />
@@ -103,7 +103,7 @@ const GeneralComponent = ({
             In compact UI, hide after{" "}
             <input
               type="text"
-              className="input w-8 inline-block disabled:bg-gray-300 py-0"
+              className="input w-8 inline-block disabled:bg-gray-200 dark:disabled:bg-gray-400 py-0"
               defaultValue={miniModeHideTimeout}
               disabled={!useMiniModeHideTimeout}
               onChange={(e) => {
@@ -132,7 +132,7 @@ const GeneralComponent = ({
             In compact UI, only show{" "}
             <input
               type="text"
-              className="input w-8 inline-block disabled:bg-gray-300 py-0"
+              className="input w-8 inline-block disabled:bg-gray-200 dark:disabled:bg-gray-400 py-0"
               defaultValue={miniModeFewerAlternativesCount}
               disabled={!useMiniModeFewerAlternatives}
               onChange={(e) => {
