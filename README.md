@@ -10,6 +10,7 @@
 - Invisible mini window (left of the main window when not using compact UI, might only be a problem on Windows) "removed"
 
 ### Minor improvements
+- RevisionBox: Don't revert clipboard after closing (This solves the problem where the dictated text is lost when returning the focus to the correct app doesn't work.)
 - Improved theme (particularly dark mode)
 - Slightly faster startup time
 
