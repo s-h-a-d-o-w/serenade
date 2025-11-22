@@ -3,7 +3,8 @@
 ## Differences
 
 ### Features
-- Added support for cursor, vscodium, windsurf
+- Added IDE support for cursor, vscodium, windsurf
+- Vue, svelte, astro files (also .mjs, .cjs, .mts, .cts) are detected as JS. (No specific training on these frameworks was done.)
 - Improved security by forcing the UI to only accept local connections (and fonts via typekit)
 
 ### Bugs
