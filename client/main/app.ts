@@ -74,7 +74,6 @@ export default class App {
     const bridge = (instance.bridge = new RendererBridge(settings));
     const system = new System(settings);
     const log = (instance.log = new Log(settings, Date.now()));
-    instance.updateDarkModeForAllWindows();
 
     log.verbose("create(): Creating custom...");
     const custom = (instance.custom = await Custom.create(settings));
@@ -159,6 +158,14 @@ export default class App {
 
     log.verbose("create(): Creating local...");
     const local = (instance.local = new Local(bridge, log, mainWindow, settings));
+
+    if (settings.getStreamingEndpoint() && settings.getStreamingEndpoint().id == "local") {
+      log.verbose("create(): Starting local speech engine...");
+      local.start();
+    } else {
+      log.verbose("create(): Setting best endpoint...");
+      await api.setBestEndpoint(settings.getStreamingEndpoints());
+    }
 
     log.verbose("create(): Creating nux...");
     const nux = new NUX(
@@ -278,14 +285,6 @@ export default class App {
       miniModeWindow,
     ]);
 
-    if (settings.getStreamingEndpoint() && settings.getStreamingEndpoint().id == "local") {
-      log.verbose("create(): Starting local speech engine...");
-      local.start();
-    } else {
-      log.verbose("create(): Setting best endpoint...");
-      await api.setBestEndpoint(settings.getStreamingEndpoints());
-    }
-
     log.verbose("create(): Registering push to talk...");
     instance.registerPushToTalk();
     log.verbose("create(): Setting bridge state...");
@@ -326,6 +325,7 @@ export default class App {
     log.verbose("create(): Done creating app.");
 
     log.verbose("create(): Showing main window...");
+    instance.updateDarkModeForAllWindows();
     mainWindow.show();
     if (settings.getMiniMode()) {
       miniModeWindow.snapToMain();
@@ -475,7 +475,7 @@ export default class App {
     this.miniModeWindow?.snapToMain();
   }
 
-  async updateDarkModeForAllWindows() {
+  updateDarkModeForAllWindows() {
     if (this.settings) {
       const darkMode = this.settings.getDarkMode();
       if (nativeTheme.themeSource != darkMode) {

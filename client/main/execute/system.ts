@@ -3,6 +3,38 @@ import * as os from "os";
 import Settings from "../settings";
 import driver from "serenade-driver";
 
+const chromeVariants = [
+  "chrome",
+  "chromium",
+  "brave",
+]
+const jetBrainsVariants = [
+  "jetbrains",
+  "androidstudio",
+  "appcode",
+  "clion",
+  "datagrip",
+  "goland",
+  "intellij",
+  "phpstorm",
+  "pycharm",
+  "rider",
+  "rubymine",
+  "resharper",
+  "webstorm"
+]
+const vsCodeVariants = [
+  "code/code",
+  "code--unity-launch",
+  "cursor",
+  "visualstudiocode",
+  "visual studio code",
+  "vs code",
+  "vscode",
+  "vscodium",
+  "windsurf"
+]
+
 export default class System {
   // some applications don't have what they're commonly referred to in their application bundle,
   // so create a set of aliases to allow people to refer to apps more naturally
@@ -56,38 +88,18 @@ export default class System {
     } else if (result.includes("atom")) {
       return "atom";
     } else if (
-      result.includes("visualstudiocode") ||
-      result.includes("visual studio code") ||
-      result.includes("vs code") ||
-      result.includes("vscode") ||
-      result.includes("code/code") ||
-      result.includes("code--unity-launch") ||
-      result.includes("cursor") ||
-      result.includes("windsurf") ||
+
+      vsCodeVariants.some(variant => result.includes(variant)) ||
       (result.split(" ").length > 0 && result.split(" ")[0].endsWith("code")) ||
       (result.split("/").length > 0 && result.split("/")[0].endsWith("code"))
     ) {
       return "vscode";
     } else if (
-      result.includes("jetbrains") ||
-      result.includes("androidstudio") ||
-      result.includes("appcode") ||
-      result.includes("clion") ||
-      result.includes("datagrip") ||
-      result.includes("goland") ||
-      result.includes("intellij") ||
-      result.includes("phpstorm") ||
-      result.includes("pycharm") ||
-      result.includes("rider") ||
-      result.includes("rubymine") ||
-      result.includes("resharper") ||
-      result.includes("webstorm")
+      jetBrainsVariants.some(variant => result.includes(variant))
     ) {
       return "jetbrains";
     } else if (
-      result.includes("chrome") ||
-      result.includes("chromium") ||
-      result.includes("brave")
+      chromeVariants.some(variant => result.includes(variant))
     ) {
       return "chrome";
     } else if (result.includes("firefox")) {

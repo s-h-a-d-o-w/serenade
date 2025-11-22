@@ -3,7 +3,7 @@
 ## Differences
 
 ### Features
-- Added support for cursor, windsurf
+- Added support for cursor, vscodium, windsurf
 - Improved security by forcing the UI to only accept local connections (and fonts via typekit)
 
 ### Bugs
