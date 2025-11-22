@@ -37,9 +37,9 @@ const LanguagesPageComponent = ({
           key={name}
           href="#"
           className={classNames(
-            "block w-full p-4 hover:bg-violet-100 dark:hover:bg-neutral-700 transition-colors border-b border-gray-200 dark:border-neutral-500",
+            "block w-full p-4 hover:bg-blue-100 dark:hover:bg-neutral-700 transition-colors border-b border-gray-200 dark:border-neutral-500",
             {
-              "bg-violet-400 hover:bg-violet-400 text-white": active,
+              "bg-blue-400 hover:bg-blue-400 text-white": active,
             }
           )}
           onClick={(e) => {
