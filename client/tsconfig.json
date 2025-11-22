@@ -1,8 +1,9 @@
 {
-  "exclude": ["bin/**", "build/**", "dist/**", "static/**"],
+  "exclude": ["bin/**", "build/**", "dist/**", "out/**", "static/**"],
   "compilerOptions": {
-    "target": "es2021",
-    "module": "commonjs",
+    "target": "esnext",
+    "module": "es2022",
+    "moduleResolution": "bundler",
     "lib": ["es5", "es6", "dom", "dom.iterable"],
     "outDir": "./out",
     "jsx": "react",
@@ -11,9 +12,11 @@
     "esModuleInterop": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
     "skipLibCheck": true,
+    "types": ["vite/client"],
   }
 }
