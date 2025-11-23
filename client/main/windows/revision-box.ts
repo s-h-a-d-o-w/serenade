@@ -11,6 +11,8 @@ export default class RevisionBoxWindow extends Window {
   private previousApplication: string = "";
   private previousClipboardContents: string = "";
 
+  public onHideCallback?: () => void;
+
   constructor(
     private mainWindow: MainWindow,
     private miniModeWindow: MiniModeWindow,
@@ -73,6 +75,8 @@ export default class RevisionBoxWindow extends Window {
         this.system.setClipboard(this.previousClipboardContents);
       }
     }
+
+    this.onHideCallback?.();
   }
 
   onGetEditorState(state: { id: string; source: string; cursor: number; cursorEnd: number }) {

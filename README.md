@@ -5,6 +5,7 @@
 ### Features
 - Added IDE support for cursor, vscodium, windsurf
 - Vue, svelte, astro files (also .mjs, .cjs, .mts, .cts) are detected as JS. (No specific training on these frameworks was done.)
+- Dictation box: You can now say "Send"/"Close"/"Copy"/"Cancel" while in the dictation box and dictation mode to do that action. Dictation mode is now also left automatically when using these commands.
 
 ### Bugs
 - Dictation box: Retains previous clipboard content on "cancel"

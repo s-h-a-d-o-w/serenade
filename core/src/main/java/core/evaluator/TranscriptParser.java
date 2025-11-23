@@ -50,8 +50,8 @@ public class TranscriptParser {
     "(undo)|(redo)|" +
     "(delete)|" +
     "(go to)|(change)|(repeat)|" +
-    "(press)|(tab)|(enter)|(close)" +
-    "(beginning)|(end)" +
+    "(press)|(tab)|(enter)|" +
+    "(cancel)|(close)|(copy)|(send)" +
     ").*"
   );
 

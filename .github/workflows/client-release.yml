@@ -6,24 +6,60 @@ on:
       - master
     paths:
       - client/**
-    paths-ignore:
       - core/**
       - code-engine/**
       - speech-engine/**
-      - config/**
-      - scripts/setup/**
       - client/build.gradle
-  workflow_run:
-    workflows: ["Local Server Build"]
-    types:
-      - completed
-    branches:
-      - master
+      - scripts/setup/**
+      - config/**
 
 jobs:
+  needs-local-server-build:
+    runs-on: ubuntu-latest
+    outputs:
+      server-changed: ${{ steps.filter.outputs.server }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            server:
+              - core/**
+              - code-engine/**
+              - speech-engine/**
+              - config/**
+              - scripts/setup/**
+              - client/build.gradle
+
+  build-local-server:
+    runs-on: ubuntu-latest
+    needs: needs-local-server-build
+    if: needs.needs-local-server-build.outputs.server-changed == 'true'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build local server in Docker
+        env:
+          SERENADE_SOURCE_ROOT: ${{ github.workspace }}
+          SERENADE_IMAGE: serenadeai/serenade-minimal
+        run: |
+          docker compose -f config/docker-compose.yaml up -d
+          docker compose -f config/docker-compose.yaml exec -T serenade bash -lc "gradle installd && gradle client:installServer"
+
+      - name: Upload local server artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: serenade-local-server
+          path: client/static/local
+
   fetch-local-server:
     runs-on: ubuntu-latest
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    needs: [ needs-local-server-build ]
+    if: needs.needs-local-server-build.outputs.server-changed != 'true'
 
     steps:
       - name: Download latest local server artifact
@@ -45,12 +81,15 @@ jobs:
       - name: Re-upload local server artifact for this workflow
         uses: actions/upload-artifact@v4
         with:
-          name: serenade-local-server-latest
+          name: serenade-local-server
           path: work
 
-  build-client:
+  release-client:
     runs-on: ${{ matrix.os }}
-    needs: fetch-local-server
+    needs: [ build-local-server, fetch-local-server ]
+    if: |
+      always() &&
+      (needs.build-local-server.result == 'success' || needs.fetch-local-server.result == 'success')
 
     strategy:
       matrix:
@@ -68,7 +107,7 @@ jobs:
       - name: Download local server artifacts
         uses: actions/download-artifact@v5
         with:
-          name: serenade-local-server-latest
+          name: serenade-local-server
           path: client/static/local
 
       - name: Setup pnpm
@@ -83,7 +122,6 @@ jobs:
           cache-dependency-path: client/pnpm-lock.yaml
 
       - name: Cache npm dependencies
-        if: matrix.os != 'macos-latest'
         uses: actions/cache@v4
         with:
           path: client/static/custom-commands-server/node_modules

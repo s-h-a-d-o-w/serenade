@@ -20,17 +20,22 @@ If you'd instead like the client to connect to a specific endpoint (e.g., a loca
 
 The following works on Windows too!
 
-1. Set `SERENADE_SOURCE_ROOT` to wherever you have the source code checked out.
+1. Declare env variables:
+```
+SERENADE_SOURCE_ROOT=<path to where you checked out serenade repo>
+SERENADE_IMAGE=serenadeai/serenade-minimal
+```
 2. Run in project root (see sections below for more detail if you're curious):
 ```
 docker compose -f config/docker-compose.yaml up -d
 docker compose -f config/docker-compose.yaml exec serenade bash
 ```
-3. In the docker container shell (this creates the files necessary to distribute the local server):
+3. In the docker container shell:
 ```
 gradle installd
 gradle client:installServer
 ```
+This creates the files necessary to distribute the local server. (If you make changes to the core code, you only need to re-run `client:installServer` to compile it and get the output into client. On Windows, you may also need to restart wsl for some reason.)
 4. `exit` (optionally `docker compose -f config/docker-compose.yaml down --remove-orphans`), then:
 ```
 cd client

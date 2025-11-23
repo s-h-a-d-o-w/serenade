@@ -148,6 +148,12 @@ export default class App {
       settings,
       system
     );
+    revisionBoxWindow.onHideCallback = () => {
+      if (active.dictateMode) {
+        active.dictateMode = false;
+        void active.update(true);
+      }
+    };
 
     log.verbose("create(): Creating native commands...");
     const nativeCommands = new NativeCommands(active, insertHistory, revisionBoxWindow, system);
