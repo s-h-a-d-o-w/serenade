@@ -5,16 +5,17 @@
 ### Features
 - Added IDE support for cursor, vscodium, windsurf
 - Vue, svelte, astro files (also .mjs, .cjs, .mts, .cts) are detected as JS. (No specific training on these frameworks was done.)
-- Improved security by forcing the UI to only accept local connections (and fonts via typekit)
 
 ### Bugs
+- Dictation box: Retains previous clipboard content on "cancel"
 - Invisible mini window (left of the main window when not using compact UI, might only be a problem on Windows) "removed"
-- Fixed position drift of settings and dictation box windows
+- Fixed position drift of when closing/reopening settings and dictation box windows
 
 ### Minor improvements
-- RevisionBox: Doesn't revert clipboard after closing. (This solves the problem where the dictated text is lost when returning the focus to the correct app doesn't work.)
-- RevisionBox: Retains previous clipboard content on "cancel"
+- Dictation box: Dicated text is copied to the clipboard when using the "close" or "send" command. (This solves the problem where the dictated text is lost if returning the focus to the correct app doesn't work.)
 - Improved theme (particularly dark mode)
+- Improved security by forcing the UI to only accept local connections (and fonts via typekit)
+- Native scrollbars throughout
 - Slightly faster startup time
 
 ### Dev changes
