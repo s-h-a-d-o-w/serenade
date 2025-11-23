@@ -11,7 +11,6 @@ on:
       - client/build.gradle
       - scripts/setup/**
       - config/**
-  workflow_dispatch:
 
 jobs:
   build-local-server:
@@ -21,16 +20,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set environment variable
-        run: echo "SERENADE_SOURCE_ROOT=${{ github.workspace }}" >> $GITHUB_ENV
-
       - name: Build local server in Docker
         env:
+          SERENADE_SOURCE_ROOT: ${{ github.workspace }}
           SERENADE_IMAGE: serenadeai/serenade-minimal
         run: |
           docker compose -f config/docker-compose.yaml up -d
           docker compose -f config/docker-compose.yaml exec -T serenade bash -lc "gradle installd && gradle client:installServer"
-          docker compose -f config/docker-compose.yaml down --remove-orphans
 
       - name: Upload local server artifacts
         uses: actions/upload-artifact@v4

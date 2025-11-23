@@ -4,10 +4,26 @@ on:
   push:
     branches:
       - master
+    paths:
+      - client/**
+    paths-ignore:
+      - core/**
+      - code-engine/**
+      - speech-engine/**
+      - config/**
+      - scripts/setup/**
+      - client/build.gradle
+  workflow_run:
+    workflows: ["Local Server Build"]
+    types:
+      - completed
+    branches:
+      - master
 
 jobs:
   fetch-local-server:
     runs-on: ubuntu-latest
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
 
     steps:
       - name: Download latest local server artifact
