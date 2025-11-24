@@ -5,6 +5,7 @@ import RendererBridge from "../bridge";
 import Settings from "../settings";
 import System from "../execute/system";
 import Window from "./window";
+import driver from "serenade-driver";
 
 export default class RevisionBoxWindow extends Window {
   private promises: any = {};
@@ -141,8 +142,7 @@ export default class RevisionBoxWindow extends Window {
 
   async show(action: string = "") {
     const app = await this.system.determineActiveApplication();
-    const active = app.split(" ");
-    this.previousApplication = active[active.length - 1];
+    this.previousApplication = await driver.getActiveApplication();
     this.previousClipboardContents = this.system.getClipboard();
 
     let source = "";

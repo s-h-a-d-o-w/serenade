@@ -8,6 +8,7 @@
 - Dictation box: You can now say "Send"/"Close"/"Copy"/"Cancel" while in the dictation box and dictation mode to do that action. Dictation mode is now also left automatically when using these commands.
 
 ### Bugs
+- Dictation box: Returns focus to the previous app after closing more consistently. (Previously, this sometimes didn't work with special apps like IDEs or browsers - like e.g. trying to return focus to "chrome" when you actually use "brave". It still doesn't work when the OS runs multiple instances and can't differentiate, like Explorer on Windows.)
 - Dictation box: Retains previous clipboard content on "cancel"
 - Invisible mini window (left of the main window when not using compact UI, might only be a problem on Windows) "removed"
 - Fixed position drift of when closing/reopening settings and dictation box windows

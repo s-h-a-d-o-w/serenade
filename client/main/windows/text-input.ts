@@ -3,6 +3,7 @@ import Bridge from "../bridge";
 import MainWindow from "./main";
 import System from "../execute/system";
 import Window from "./window";
+import driver from "serenade-driver";
 
 export default class TextInputWindow extends Window {
   private previousApplication: string = "";
@@ -64,9 +65,7 @@ export default class TextInputWindow extends Window {
   }
 
   async show() {
-    const app = await this.system.determineActiveApplication();
-    const active = app.split(" ");
-    this.previousApplication = active[active.length - 1];
+    this.previousApplication = await driver.getActiveApplication();
 
     super.show();
     this.send("focusTextInput", {});
