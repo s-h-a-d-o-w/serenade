@@ -101,7 +101,7 @@ jobs:
           sudo apt-get update && sudo apt-get install -y libx11-dev libxtst-dev
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Download local server artifacts
         uses: actions/download-artifact@v5
@@ -110,18 +110,19 @@ jobs:
           path: client/static/local
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           package_json_file: client/package.json
+          
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: '22'
+          node-version: lts/*
           cache: 'pnpm'
           cache-dependency-path: client/pnpm-lock.yaml
 
       - name: Cache npm dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: client/static/custom-commands-server/node_modules
           key: ${{ runner.os }}-npm-${{ hashFiles('client/static/custom-commands-server/package-lock.json') }}
