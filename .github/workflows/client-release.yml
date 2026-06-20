@@ -87,7 +87,8 @@ jobs:
 
   release-client:
     runs-on: ${{ matrix.os }}
-    needs: build-local-server
+    needs: [fetch-local-server, build-local-server]
+    if: always() && (needs.fetch-local-server.result == 'success' || needs.build-local-server.result == 'success')
 
     strategy:
       matrix:
