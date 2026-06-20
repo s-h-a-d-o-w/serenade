@@ -196,6 +196,7 @@ export default class App {
       log
     );
 
+    await instance.ipcServer.readyPromise;
     log.verbose("create(): Starting custom commands server...");
     Promise.race([custom.start(), new Promise((resolve) => setTimeout(()=> resolve('timeout'), CUSTOM_COMMANDS_SERVER_TIMEOUT))]).then((result) => {
       if (result === 'timeout') {

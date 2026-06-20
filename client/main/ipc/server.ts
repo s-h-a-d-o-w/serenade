@@ -13,6 +13,7 @@ const maximumIconLength = 20000;
 
 export default class IPCServer {
   private server: WebSocketServer;
+  public readyPromise: undefined | Promise<void> = undefined;
 
   constructor(
     private active: Active,
@@ -24,7 +25,15 @@ export default class IPCServer {
     private stream: Stream,
     private log: Log
   ) {
+    let readyResolve: () => void = () => {};
+    this.readyPromise = new Promise<void>((resolve) => {
+      readyResolve = resolve;
+    });
+
     this.server = new WebSocketServer({ host: "localhost", port: 17373 });
+    this.server.on("listening", () => {
+      readyResolve();
+    });
     this.server.on("connection", (websocket: WebSocket) => {
       websocket.on("message", (message) => {
         const request = JSON.parse(typeof message === "string" ? message : message.toString());
@@ -154,6 +163,8 @@ export default class IPCServer {
         this.pluginManager.removeWebSocket(websocket);
       });
     });
+
+    this.log.verbose("IPC server started on port 17373");
   }
 
   stop() {
