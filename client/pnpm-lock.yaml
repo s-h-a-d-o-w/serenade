@@ -148,7 +148,7 @@ importers:
         specifier: 42.4.1
         version: 42.4.1
       electron-builder:
-        specifier: ^26.0.12
+        specifier: ^26.15.3
         version: 26.15.3(electron-builder-squirrel-windows@26.15.3)
       globals:
         specifier: ^16.5.0
