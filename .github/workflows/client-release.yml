@@ -64,7 +64,7 @@ jobs:
   build-local-server:
     runs-on: ubuntu-latest
     needs: fetch-local-server
-    if: fetch-local-server.result != 'success'
+    if: needs.fetch-local-server.result != 'success'
 
     steps:
       - name: Checkout code
