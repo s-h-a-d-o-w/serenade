@@ -3,7 +3,7 @@ import Bridge from "../bridge";
 import MainWindow from "./main";
 import System from "../execute/system";
 import Window from "./window";
-import driver from "serenade-driver";
+import driver from "@s-h-a-d-o-w/serenade-driver";
 
 export default class TextInputWindow extends Window {
   private previousApplication: string = "";

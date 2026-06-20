@@ -28,8 +28,8 @@ export default defineConfig({
       external: [
         ...allCoreModules,
         'electron',
-        'speech-recorder',
-        'serenade-driver',
+        '@s-h-a-d-o-w/speech-recorder',
+        '@s-h-a-d-o-w/serenade-driver',
         'ws'
       ],
       output: {
@@ -45,11 +45,11 @@ export default defineConfig({
           dest: 'static/custom-commands-server-modules'
         },
         {
-          src: '../node_modules/speech-recorder/build/Release/*',
+          src: '../node_modules/@s-h-a-d-o-w/speech-recorder/build/Release/*',
           dest: 'Release'
         },
         {
-          src: '../node_modules/serenade-driver/build/Release/*',
+          src: '../static/custom-commands-server/node_modules/@s-h-a-d-o-w/serenade-driver/build/Release/*',
           dest: 'Release'
         }
       ]

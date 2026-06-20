@@ -5,7 +5,7 @@ import RendererBridge from "../bridge";
 import Settings from "../settings";
 import System from "../execute/system";
 import Window from "./window";
-import driver from "serenade-driver";
+import driver from "@s-h-a-d-o-w/serenade-driver";
 
 export default class RevisionBoxWindow extends Window {
   private promises: any = {};

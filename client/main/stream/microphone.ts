@@ -3,7 +3,7 @@ import RendererBridge from "../bridge";
 import Settings from "../settings";
 import SettingsWindow from "../windows/settings";
 import Window from "../windows/window";
-import { SpeechRecorder, devices } from "speech-recorder";
+import { SpeechRecorder, devices } from "@s-h-a-d-o-w/speech-recorder";
 
 type MicrophoneInput = {
   id: number;

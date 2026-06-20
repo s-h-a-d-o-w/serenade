@@ -1,7 +1,7 @@
 import { clipboard } from "electron";
 import * as os from "os";
 import Settings from "../settings";
-import driver from "serenade-driver";
+import driver from "@s-h-a-d-o-w/serenade-driver";
 
 const chromeVariants = [
   "chrome",

@@ -6,7 +6,8 @@ import * as os from "os";
 import * as path from "path";
 import Microphone from "./stream/microphone";
 import { Endpoint } from "shared/endpoint";
-import { devices } from "speech-recorder";
+import { devices } from "@s-h-a-d-o-w/speech-recorder";
+import Log from "./log";
 
 export type Theme = "light" | "dark" | "system";
 
@@ -16,9 +17,11 @@ export default class Settings {
   private userData: any = {};
   private wordsData: any = {};
   private wordsLastLoad: number = 0;
+  private log: Log;
 
   constructor() {
     this.setInstalled(true);
+    this.log = new Log(this, Date.now());
   }
 
   private createIfNotExists(file: string) {
@@ -231,6 +234,11 @@ export default class Settings {
   }
 
   getMicrophone(): any {
+    if(devices().length == 0) {
+      this.log.error(new Error("No microphones found!"));
+      process.exit(1);
+    }
+
     // use the microphone from settings only if the microphone at that index has a matching name.
     // microphones can re-order and different microphones can have the same name,
     // so only set to a non-default microphone if it matches both name and index.

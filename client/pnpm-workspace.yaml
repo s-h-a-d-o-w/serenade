@@ -8,13 +8,11 @@ onlyBuiltDependencies:
   - '@fortawesome/fontawesome-svg-core'
   - '@fortawesome/free-regular-svg-icons'
   - '@fortawesome/free-solid-svg-icons'
+  - '@s-h-a-d-o-w/serenade-driver'
+  - '@s-h-a-d-o-w/speech-recorder'
   - bufferutil
   - electron
   - electron-winstaller
   - esbuild
   - protobufjs
-  - serenade-driver
-  - speech-recorder
   - utf-8-validate
-
-# shamefullyHoist: true

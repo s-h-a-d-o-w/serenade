@@ -2,6 +2,11 @@
 
 Serenade is built using the [Gradle](https://gradle.org) build system. We also have a few scripts useful for running various Serenade services.
 
+## Prerequisites
+
+- libx11-dev
+- libxtst-dev
+
 ## Client (dev)
 
 To run the Serenade app, simply run:

@@ -1,5 +1,5 @@
 import chokidar from "chokidar";
-import driver from "serenade-driver";
+import driver from "@s-h-a-d-o-w/serenade-driver";
 import fg from "fast-glob";
 import os from "os";
 import path from "path";
