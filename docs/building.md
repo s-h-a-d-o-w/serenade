@@ -27,8 +27,8 @@ The following works on Windows too!
 
 1. Declare env variables:
 ```
-SERENADE_SOURCE_ROOT=<path to where you checked out serenade repo>
-SERENADE_IMAGE=serenadeai/serenade-minimal
+export SERENADE_SOURCE_ROOT=<path to where you checked out serenade repo>
+export SERENADE_IMAGE=serenadeai/serenade-minimal
 ```
 2. Run in project root (see sections below for more detail if you're curious):
 ```

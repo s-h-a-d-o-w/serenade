@@ -23,6 +23,9 @@
 ### Dev changes
 - Modernized client (node 22+ support, latest dependencies as of 11/2025, pnpm, vite)
 
+### Dev notes
+
+- Yes, declaring dependencies in the client root is ugly. It's a legacy I've kept for time reasons. Sooner or later, we should divide those up into the respective packages.
 
 <img src="https://cdn.serenade.ai/img/logo-github.png" width="250px" alt="Serenade Logo" />
 
