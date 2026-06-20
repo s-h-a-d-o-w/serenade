@@ -33,32 +33,9 @@ jobs:
               - scripts/setup/**
               - client/build.gradle
 
-  build-local-server:
-    runs-on: ubuntu-latest
-    needs: needs-local-server-build
-    if: needs.needs-local-server-build.outputs.server-changed == 'true'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Build local server in Docker
-        env:
-          SERENADE_SOURCE_ROOT: ${{ github.workspace }}
-          SERENADE_IMAGE: serenadeai/serenade-minimal
-        run: |
-          docker compose -f config/docker-compose.yaml up -d
-          docker compose -f config/docker-compose.yaml exec -T serenade bash -lc "gradle installd && gradle client:installServer"
-
-      - name: Upload local server artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: serenade-local-server
-          path: client/static/local
-
   fetch-local-server:
     runs-on: ubuntu-latest
-    needs: [ needs-local-server-build ]
+    needs: needs-local-server-build
     if: needs.needs-local-server-build.outputs.server-changed != 'true'
 
     steps:
@@ -84,12 +61,32 @@ jobs:
           name: serenade-local-server
           path: work
 
+  build-local-server:
+    runs-on: ubuntu-latest
+    needs: fetch-local-server
+    if: fetch-local-server.result != 'success'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build local server in Docker
+        env:
+          SERENADE_SOURCE_ROOT: ${{ github.workspace }}
+          SERENADE_IMAGE: serenadeai/serenade-minimal
+        run: |
+          docker compose -f config/docker-compose.yaml up -d
+          docker compose -f config/docker-compose.yaml exec -T serenade bash -lc "gradle installd && gradle client:installServer"
+
+      - name: Upload local server artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: serenade-local-server
+          path: client/static/local
+
   release-client:
     runs-on: ${{ matrix.os }}
-    needs: [ build-local-server, fetch-local-server ]
-    if: |
-      always() &&
-      (needs.build-local-server.result == 'success' || needs.fetch-local-server.result == 'success')
+    needs: build-local-server
 
     strategy:
       matrix:
