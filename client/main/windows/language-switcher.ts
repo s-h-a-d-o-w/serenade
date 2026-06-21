@@ -18,7 +18,7 @@ export default class LanguageSwitcherWindow extends Window {
     mainWindow: MainWindow,
   ): Promise<LanguageSwitcherWindow> {
     const instance = new LanguageSwitcherWindow(active, bridge, mainWindow);
-    await instance.createWindow(bridge);
+    await instance.createWindow(bridge, mainWindow);
     return instance;
   }
 

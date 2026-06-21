@@ -13,7 +13,8 @@ export default abstract class Window {
   abstract title(): string;
   abstract url(): string;
 
-  async createWindow(bridge: RendererBridge): Promise<void> {
+  async createWindow(bridge: RendererBridge, mainWindow?: MainWindow): Promise<void> {
+    const isMain = !mainWindow;
     return new Promise((resolve) => {
       let icon = "icon_512x512.png";
       if (os.platform() == "win32") {
@@ -22,10 +23,11 @@ export default abstract class Window {
 
       const position = this.position();
       this.window = new BrowserWindow({
-        icon: path.join(__dirname, "..", "static", "img", icon),
+        ...(isMain ? { icon: path.join(__dirname, "..", "static", "img", icon) } : {}),
+        parent: isMain ? undefined : mainWindow?.window,
         titleBarStyle: "hidden",
         alwaysOnTop: true,
-        show: this.main() || this.transparent(),
+        show: isMain ? true : this.transparent(),
         x: position.x,
         y: position.y,
         width: this.width(),
@@ -36,7 +38,7 @@ export default abstract class Window {
         maxHeight: this.maxHeight(),
         title: this.title(),
         frame: false,
-        skipTaskbar: !this.main(),
+        skipTaskbar: !isMain,
         resizable: !this.transparent(),
         transparent: this.transparent(),
         hasShadow: !this.transparent(),
@@ -51,7 +53,7 @@ export default abstract class Window {
       this.window.setMenuBarVisibility(false);
       this.window.setAutoHideMenuBar(true);
       this.window.setAlwaysOnTop(true);
-      if (!this.main()) {
+      if (!isMain) {
         this.window.on("close", (e) => {
           e.preventDefault();
           this.hide();
@@ -111,10 +113,6 @@ export default abstract class Window {
     } else {
       this.window.loadURL(`http://localhost:4000#/${url}`);
     }
-  }
-
-  main(): boolean {
-    return false;
   }
 
   maxHeight(): number | undefined {

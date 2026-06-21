@@ -31,7 +31,7 @@ export default class RevisionBoxWindow extends Window {
     system: System
   ): Promise<RevisionBoxWindow> {
     const instance = new RevisionBoxWindow(mainWindow, miniModeWindow, settings, system);
-    await instance.createWindow(bridge);
+    await instance.createWindow(bridge, mainWindow);
     return instance;
   }
 

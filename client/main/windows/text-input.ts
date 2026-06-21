@@ -20,12 +20,12 @@ export default class TextInputWindow extends Window {
     system: System
   ): Promise<TextInputWindow> {
     const instance = new TextInputWindow(mainWindow, system);
-    await instance.createWindow(bridge);
+    await instance.createWindow(bridge, mainWindow);
     return instance;
   }
 
-  async createWindow(bridge: Bridge) {
-    super.createWindow(bridge);
+  async createWindow(bridge: Bridge, mainWindow?: MainWindow) {
+    super.createWindow(bridge, mainWindow);
 
     if (this.window?.setWindowButtonVisibility) {
       this.window?.setWindowButtonVisibility(false);

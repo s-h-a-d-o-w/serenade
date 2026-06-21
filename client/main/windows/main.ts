@@ -154,7 +154,7 @@ export default class MainWindow extends Window {
       try {
         if (!this.quitInProgress && this.settings.getContinueRunningInTray()) {
           e.preventDefault();
-          this.hide(false, true);
+          this.hide(false);
           return false;
         }
 
@@ -211,36 +211,21 @@ export default class MainWindow extends Window {
     return Math.max(this.minHeight(), this.settings.getBounds().height);
   }
 
-  hide(windowAlreadyHidden: boolean = false, removeFromDock: boolean = false) {
+  hide(windowAlreadyMinimized: boolean = false) {
+    // Tracking shown state ourselves is necessary because Electron says that the window isn't visible immediately, not giving us opportunity to check if it is visible before hiding it.
     if (!this.isShown) {
       return;
-    }
-
-    if (removeFromDock && app.dock) {
-      this.window?.setSkipTaskbar(true);
-      if (app.dock) {
-        app.dock.hide();
-      }
     }
 
     this.isShown = false;
     this.updateTray();
 
-    if (!windowAlreadyHidden) {
+    if (!windowAlreadyMinimized) {
       this.window?.minimize();
     }
 
-    const miniModeWindow = this.miniModeWindow();
-    if (miniModeWindow) {
-      miniModeWindow.show();
-      miniModeWindow.snapToMain();
-    }
-
-    this.app.clearAlternativesAndShowExamples();
-  }
-
-  main(): boolean {
-    return true;
+    this.window?.hide();
+    this.miniModeWindow()?.hide()
   }
 
   minHeight(): number {
@@ -295,19 +280,14 @@ export default class MainWindow extends Window {
       return;
     }
 
-    this.window?.setSkipTaskbar(false);
-    if (app.dock) {
-      app.dock.show();
-    }
-
     this.isShown = true;
     this.updateTray();
     if (!windowAlreadyShown && this.window) {
-      if (this.window.isMinimized()) {
-        this.window.restore();
-      }
-
       this.window.showInactive();
+      // Fallback for OSes where showInactive doesn't work. `isVisible` doesn't work.
+      if (this.window.isMinimized()) {
+        this.window.show();
+      }
     }
 
     const miniModeWindow = this.miniModeWindow();
