@@ -21,7 +21,7 @@ If you'd instead like the client to connect to a specific endpoint (e.g., a loca
 
     ENDPOINT=http://localhost:17200 pnpm dev
 
-## Client (release)
+## Client (release, local)
 
 The following works on Windows too!
 
