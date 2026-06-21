@@ -97,6 +97,7 @@ jobs:
           GH_TOKEN: ${{ secrets.CD_TOKEN }}
         run: |
           gh release create "${GITHUB_REF_NAME}" \
+            --draft \
             --target "${GITHUB_SHA}" \
             --title "${GITHUB_REF_NAME}" \
             --notes ""

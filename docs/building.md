@@ -21,6 +21,13 @@ If you'd instead like the client to connect to a specific endpoint (e.g., a loca
 
     ENDPOINT=http://localhost:17200 pnpm dev
 
+## Client (release, github)
+
+1. Bump version in `client/package.json`.
+2. Add tag to version bump commit.
+3. Push and wait for draft release to be created.
+4. Update draft release description and remove draft status.
+
 ## Client (release, local)
 
 The following works on Windows too!
