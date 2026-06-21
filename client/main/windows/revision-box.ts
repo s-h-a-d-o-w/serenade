@@ -12,8 +12,6 @@ export default class RevisionBoxWindow extends Window {
   private previousApplication: string = "";
   private previousClipboardContents: string = "";
 
-  public onHideCallback?: () => void;
-
   constructor(
     private mainWindow: MainWindow,
     private miniModeWindow: MiniModeWindow,
@@ -67,7 +65,7 @@ export default class RevisionBoxWindow extends Window {
           await this.system.pressKey("backspace");
         }
 
-        if (action == "send") {
+        if (action === "send") {
           await this.system.pressKey("enter");
         }
       }
@@ -77,7 +75,7 @@ export default class RevisionBoxWindow extends Window {
       }
     }
 
-    this.onHideCallback?.();
+    // this.onHideCallback?.();
   }
 
   onGetEditorState(state: { id: string; source: string; cursor: number; cursorEnd: number }) {

@@ -39,6 +39,20 @@ export default class CommandHandler {
     this.app.clearAlternativesAndShowExamples();
   }
 
+  private stopDictateMode() {
+    if (!this.active.dictateMode) {
+      return;
+    }
+  
+    this.active.dictateMode = false;
+    this.bridge.setState(
+      {
+        dictateMode: false,
+      },
+      [this.mainWindow]
+    );
+  }
+
   async COMMAND_TYPE_BACK(_data: core.ICommand): Promise<any> {
     this.nux.back(true);
   }
@@ -57,7 +71,8 @@ export default class CommandHandler {
   async COMMAND_TYPE_CANCEL(_data: core.ICommand): Promise<any> {
     this.clearPending();
     if (this.revisionBoxWindow.shown()) {
-      this.revisionBoxWindow.hide("cancel");
+      this.stopDictateMode();
+      await this.revisionBoxWindow.hide("cancel");
     }
   }
 
@@ -109,7 +124,8 @@ export default class CommandHandler {
   }
 
   async COMMAND_TYPE_HIDE_REVISION_BOX(data: any): Promise<any> {
-    this.revisionBoxWindow.hide(data.text);
+    this.stopDictateMode();
+    await this.revisionBoxWindow.hide(data.text);
   }
 
   async COMMAND_TYPE_INSERT(data: core.ICommand): Promise<any> {
@@ -170,7 +186,7 @@ export default class CommandHandler {
   }
 
   async COMMAND_TYPE_SHOW_REVISION_BOX(data: any): Promise<any> {
-    this.revisionBoxWindow.show(data.text);
+    await this.revisionBoxWindow.show(data.text);
   }
 
   async COMMAND_TYPE_START_DICTATE(_data: any): Promise<any> {
