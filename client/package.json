@@ -103,7 +103,7 @@
     "@fortawesome/react-fontawesome": "^3.1.0",
     "@headlessui/react": "^2.2.9",
     "@heroicons/react": "^2.2.0",
-    "@s-h-a-d-o-w/serenade-driver": "1.1.16",
+    "@s-h-a-d-o-w/serenade-driver": "1.1.23",
     "@s-h-a-d-o-w/speech-recorder": "2.1.12",
     "bufferutil": "^4.0.9",
     "classnames": "^2.5.1",

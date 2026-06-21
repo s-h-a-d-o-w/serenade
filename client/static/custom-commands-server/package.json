@@ -10,7 +10,7 @@
     "bufferutil": "^4.0.9",
     "chokidar": "^4.0.3",
     "fast-glob": "^3.3.3",
-    "@s-h-a-d-o-w/serenade-driver": "1.1.15",
+    "@s-h-a-d-o-w/serenade-driver": "1.1.23",
     "ws": "^8.18.3"
   }
 }
