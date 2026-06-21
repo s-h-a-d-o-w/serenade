@@ -90,6 +90,8 @@ jobs:
     needs: [fetch-local-server, build-local-server]
     if: always() && (needs.fetch-local-server.result == 'success' || needs.build-local-server.result == 'success')
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
       - name: Create GitHub release
         env:
           GH_TOKEN: ${{ secrets.CD_TOKEN }}
