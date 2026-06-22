@@ -109,7 +109,7 @@ export default class Local {
           );
         }
       } catch (e) {}
-    }, 1000);
+    }, 100);
   }
 
   requiresNewerMac() {
