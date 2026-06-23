@@ -44,7 +44,6 @@ public class Core {
       component.selectorFactory().create(language);
     }
 
-    Logs.logInfo(logger, "core.started", "Running core on " + port);
     server.start(port);
   }
 }

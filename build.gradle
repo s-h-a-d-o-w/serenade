@@ -75,10 +75,10 @@ subprojects {
         maxHeapSize = "2048m"
 
         jvmArgs([
-            "-Dlogback.configurationFile=$sourceRoot/toolbelt/src/main/resources/logback-test.xml"
+            "-Dlogback.configurationFile=$sourceRoot/toolbelt/src/test/resources/logback-test.xml"
         ])
 
-        systemProperty "java.util.logging.config.file", "$sourceRoot/toolbelt/src/main/resources/logging-test.properties"
+        systemProperty "java.util.logging.config.file", "$sourceRoot/toolbelt/src/test/resources/logging-test.properties"
         useJUnitPlatform()
         dependsOn cleanTest
         testLogging {

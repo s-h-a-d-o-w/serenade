@@ -108,6 +108,7 @@ public class CoreServer {
       server.setHandler(handlerCollection);
 
       server.start();
+      Logs.logInfo(logger, "core.started", "Core has been started.");
       server.join();
     } catch (Exception e) {
       Logs.logError(logger, "Server exception", e);
