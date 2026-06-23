@@ -22,7 +22,6 @@ VERSION
 *.tar.gz
 *.tar.xz
 *.vim
-.vscode
 .project
 .classpath
 
