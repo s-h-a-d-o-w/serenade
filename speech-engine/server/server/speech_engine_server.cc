@@ -412,7 +412,10 @@ int main(int argc, char* argv[]) {
         });
 
     app.loglevel(crow::LogLevel::Error);
-    app.port(17202).server_name("").multithreaded().run();
+    auto running = app.port(17202).server_name("").multithreaded().run_async();
+    app.wait_for_server_start();
+    std::cout << "speech-engine has been started." << std::endl;
+    running.wait();
   } catch (const std::exception& e) {
     std::cerr << "speech-engine exception: " << e.what() << std::endl;
   }

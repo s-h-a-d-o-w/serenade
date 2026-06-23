@@ -297,8 +297,10 @@ int main(int argc, char* argv[]) {
         });
 
     app.loglevel(crow::LogLevel::Error);
-    app.port(17203).server_name("").multithreaded().run();
-
+    auto running = app.port(17203).server_name("").multithreaded().run_async();
+    app.wait_for_server_start();
+    std::cout << "code-engine has been started." << std::endl;
+    running.wait();
   } catch (const std::exception& e) {
     std::cerr << "code-engine exception: " << e.what() << std::endl;
   }
