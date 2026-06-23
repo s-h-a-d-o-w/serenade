@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  serenade:
+    command: "tail -F /dev/null"
+    image: "${SERENADE_IMAGE:-serenadeai/serenade}"
+    stdin_open: true
+    tty: true
+    volumes:
+      - "gradle:/root/.gradle"
+      - "logs:/logs"
+      - "${SERENADE_SOURCE_ROOT:-~/serenade}:/root/serenade"
+
+volumes:
+  gradle:
+  logs:

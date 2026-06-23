@@ -39,16 +39,15 @@ export SERENADE_IMAGE=serenadeai/serenade-minimal
 ```
 2. Run in project root (see sections below for more detail if you're curious):
 ```
-docker compose -f config/docker-compose.yaml up -d
-docker compose -f config/docker-compose.yaml exec serenade bash
+docker compose -f config/docker-compose.build.yaml up -d
+docker compose -f config/docker-compose.build.yaml exec serenade bash
 ```
 3. In the docker container shell:
 ```
-gradle installd
-gradle client:installServer
+gradle installd && gradle client:installServer
 ```
 This creates the files necessary to distribute the local server. (If you make changes to the core code, you only need to re-run `client:installServer` to compile it and get the output into client. On Windows, you may also need to restart wsl for some reason.)
-4. `exit` (optionally `docker compose -f config/docker-compose.yaml down --remove-orphans`), then:
+4. `exit` (optionally `docker compose -f config/docker-compose.build.yaml down --remove-orphans`), then:
 ```
 cd client
 pnpm install
