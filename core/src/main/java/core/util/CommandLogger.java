@@ -34,7 +34,6 @@ import javax.sound.sampled.AudioSystem;
 import javax.xml.bind.DatatypeConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.event.Level;
 import toolbelt.env.Env;
 import toolbelt.logging.Logs;
 
@@ -177,6 +176,6 @@ public class CommandLogger {
       }
     }
 
-    Logs.logData(logger, Level.INFO, "core.responses", data);
+    Logs.logData(logger, "core.responses", data);
   }
 }

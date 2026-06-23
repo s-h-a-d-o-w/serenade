@@ -10,8 +10,12 @@ import Settings from "../settings";
 import { type ChildProcess, spawnSync } from "child_process";
 import { spawn } from "child_process";
 import commandExists from "command-exists";
+import { type Readable } from "stream";
 
 type RunnableService = "core" | "speech-engine" | "code-engine";
+type CoreLogLevel = "TRACE" | "DEBUG" | "INFO" | "WARN" | "ERROR";
+
+const coreLogLevels: CoreLogLevel[] = ["TRACE", "DEBUG", "INFO", "WARN", "ERROR"];
 
 export default class Local {
   private processes: { [key in RunnableService]?: ChildProcess } = {};
@@ -26,14 +30,55 @@ export default class Local {
     private settings: Settings
   ) {}
 
+  private coreLogLevel() {
+    return this.settings.getUseVerboseLogging() ? "DEBUG" : "INFO";
+  }
+
+  private coreLogLineLevel(line: string) {
+    const match = line.match(/^\d{2}:\d{2}:\d{2}\.\d{3} \[[^\]]+\]\s+(TRACE|DEBUG|INFO|WARN|ERROR)\s+/);
+    return match?.[1] as CoreLogLevel | undefined;
+  }
+
+  private shouldWriteCoreLogLine(line: string) {
+    const lineLevel = this.coreLogLineLevel(line);
+    console.log(lineLevel);
+    if (!lineLevel) {
+      return false;
+    }
+
+    return coreLogLevels.indexOf(lineLevel) >= coreLogLevels.indexOf(this.coreLogLevel());
+  }
+
+  private captureCoreOutput(input: Readable, stream: fs.WriteStream) {
+    let buffer = "";
+
+    input.on("data", data => {
+      buffer += data.toString();
+      const lines = buffer.split(/\r?\n/);
+      buffer = lines.pop() || "";
+
+      for (const line of lines) {
+        if (this.shouldWriteCoreLogLine(line)) {
+          stream.write(`${line}\n`);
+        }
+      }
+    });
+  }
+
   private captureOutput(service: RunnableService, child: ChildProcess) {
     if (this.logStreams[service]) {
       return;
     }
 
     const stream = fs.createWriteStream(path.join(this.settings.path(), `${service}.log`));
-    child.stdout!.pipe(stream);
-    child.stderr!.pipe(stream);
+    if (service == "core") {
+      this.captureCoreOutput(child.stdout!, stream);
+      this.captureCoreOutput(child.stderr!, stream);
+    } else {
+      child.stdout!.pipe(stream);
+      child.stderr!.pipe(stream);
+    }
+
     this.logStreams[service] = stream;
   }
 
@@ -187,6 +232,7 @@ export default class Local {
       os.platform() == "win32" ? ["./run-pro"] : [],
       {
         cwd: path.join(__dirname, "..", "static", "local", "core", "bin"),
+        env: { ...process.env, LOG_LEVEL: this.coreLogLevel() },
         shell: true,
         windowsHide: true,
       }
