@@ -216,6 +216,16 @@ export default class RendererProcessEventHandlers {
         this.app.updateDarkModeForAllWindows();
       }
 
+      if (data.autoUpdate !== undefined) {
+        this.settings.setAutoUpdate(data.autoUpdate);
+        this.bridge.setState(
+          {
+            autoUpdate: data.autoUpdate,
+          },
+          [this.settingsWindow()]
+        );
+      }
+
       if (data.disableSuggestions !== undefined) {
         this.settings.setDisableSuggestions(data.disableSuggestions);
         this.bridge.setState(

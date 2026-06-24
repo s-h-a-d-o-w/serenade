@@ -136,6 +136,10 @@ export default class Settings {
     return this.get("user", "animations", false);
   }
 
+  getAutoUpdate(): boolean {
+    return this.get("system", "auto_update", true);
+  }
+
   getBounds(): any {
     const result = this.get("system", "bounds", { x: 0, y: 0, width: 0, height: 0 });
     const display = screen.getDisplayNearestPoint({ x: result.x, y: result.y });
@@ -197,10 +201,6 @@ export default class Settings {
 
   getDisableSuggestions(): boolean {
     return this.get("user", "disable_suggestions", false);
-  }
-
-  getDisableAutoUpdate(): boolean {
-    return this.get("system", "disable_auto_update", false);
   }
 
   getEditorAutocomplete(): boolean {
@@ -394,6 +394,10 @@ export default class Settings {
 
   setAnimations(animations: boolean) {
     this.set("user", "animations", animations);
+  }
+
+  setAutoUpdate(autoUpdate: boolean) {
+    this.set("system", "auto_update", autoUpdate);
   }
 
   setBounds(bounds: { x: number; y: number; width: number; height: number }) {

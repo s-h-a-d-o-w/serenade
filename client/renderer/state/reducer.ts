@@ -5,6 +5,7 @@ const initialState = {
   alternativesSpinner: [],
   animations: false,
   app: "",
+  autoUpdate: true,
   autocomplete: [],
   chunkSilenceThreshold: 0.1,
   chunkSpeechThreshold: 0.3,

@@ -38,13 +38,11 @@ if (!lock) {
   });
 
   app.whenReady().then(async () => {
-    // transparent windows need a slight delay to render correctly
-    // https://github.com/electron/electron/issues/2170
-    setTimeout(async () => {
-      app.setName("Serenade");
-      app.setAsDefaultProtocolClient("serenade");
-      instance = await App.create();
+    app.setName("Serenade");
+    app.setAsDefaultProtocolClient("serenade");
+    instance = await App.create();
+    if (instance.settings?.getAutoUpdate()) {
       autoUpdater.checkForUpdatesAndNotify();
-    }, 500);
+    }
   });
 }

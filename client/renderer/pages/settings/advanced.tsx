@@ -6,12 +6,13 @@ import { Toggle } from "../../components/toggle";
 
 const AdvancedComponent = ({
   animations,
-  clipboardInsert,
-  editorAutocomplete,
+  autoUpdate,
   chunkSilenceThreshold,
   chunkSpeechThreshold,
+  clipboardInsert,
   continueRunningInTray,
   disableSuggestions,
+  editorAutocomplete,
   executeSilenceThreshold,
   minimizedPosition,
   miniModeReversed,
@@ -20,12 +21,13 @@ const AdvancedComponent = ({
   useVerboseLogging,
 }: {
   animations: boolean;
-  clipboardInsert: boolean;
-  editorAutocomplete: boolean;
+  autoUpdate: boolean;
   chunkSilenceThreshold: number;
   chunkSpeechThreshold: number;
+  clipboardInsert: boolean;
   continueRunningInTray: boolean;
   disableSuggestions: boolean;
+  editorAutocomplete: boolean;
   executeSilenceThreshold: number;
   minimizedPosition: string;
   miniModeReversed: boolean;
@@ -50,6 +52,16 @@ const AdvancedComponent = ({
           <Toggle
             value={continueRunningInTray}
             onChange={(e) => setValue("continueRunningInTray", e)}
+          />
+        }
+      />
+      <Row
+        title="Update automatically"
+        subtitle="Checks and possibly updates when Serenade starts"
+        action={
+          <Toggle
+            value={autoUpdate}
+            onChange={(e) => setValue("autoUpdate", e)}
           />
         }
       />
@@ -266,12 +278,13 @@ const AdvancedComponent = ({
 
 export const Advanced = connect((state: any) => ({
   animations: state.animations,
-  clipboardInsert: state.clipboardInsert,
-  editorAutocomplete: state.editorAutocomplete,
+  autoUpdate: state.autoUpdate,
   chunkSilenceThreshold: state.chunkSilenceThreshold,
   chunkSpeechThreshold: state.chunkSpeechThreshold,
+  clipboardInsert: state.clipboardInsert,
   continueRunningInTray: state.continueRunningInTray,
   disableSuggestions: state.disableSuggestions,
+  editorAutocomplete: state.editorAutocomplete,
   executeSilenceThreshold: state.executeSilenceThreshold,
   minimizedPosition: state.minimizedPosition,
   miniModeReversed: state.miniModeReversed,

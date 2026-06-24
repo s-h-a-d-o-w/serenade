@@ -417,6 +417,7 @@ export default class App {
     this.bridge!.setState(
       {
         animations: settings.getAnimations(),
+        autoUpdate: settings.getAutoUpdate(),
         chunkSilenceThreshold: settings.getChunkSilenceThreshold(),
         chunkSpeechThreshold: settings.getChunkSpeechThreshold(),
         clipboardInsert: settings.getClipboardInsert(),
