@@ -30,11 +30,14 @@ jobs:
           docker compose -f config/docker-compose.yaml up -d
           docker compose -f config/docker-compose.yaml exec -T serenade bash -lc "gradle installd && gradle client:installServer"
 
+      - name: Package local server
+        run: tar -czf serenade-local-server.tar.gz -C client/static/local .
+
       - name: Upload local server artifacts
         uses: actions/upload-artifact@v7
         with:
           name: serenade-local-server
-          path: client/static/local
+          path: serenade-local-server.tar.gz
           retention-days: 1
           if-no-files-found: error
 
@@ -75,7 +78,12 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           name: serenade-local-server
-          path: client/static/local
+          path: .
+
+      - name: Extract local server
+        run: |
+          mkdir -p client/static/local
+          tar -xzf serenade-local-server.tar.gz -C client/static/local
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
