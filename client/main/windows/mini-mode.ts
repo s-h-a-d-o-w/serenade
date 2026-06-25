@@ -37,7 +37,7 @@ export default class MiniModeWindow extends Window {
   }
 
   async createWindow(bridge: RendererBridge, mainWindow?: MainWindow) {
-    super.createWindow(bridge, mainWindow);
+    await super.createWindow(bridge, mainWindow);
 
     if (this.window?.setWindowButtonVisibility) {
       this.window?.setWindowButtonVisibility(false);

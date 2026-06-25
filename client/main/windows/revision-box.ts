@@ -74,8 +74,6 @@ export default class RevisionBoxWindow extends Window {
         this.system.setClipboard(this.previousClipboardContents);
       }
     }
-
-    // this.onHideCallback?.();
   }
 
   onGetEditorState(state: { id: string; source: string; cursor: number; cursorEnd: number }) {

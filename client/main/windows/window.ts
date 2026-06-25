@@ -27,7 +27,7 @@ export default abstract class Window {
         parent: isMain ? undefined : mainWindow?.window,
         titleBarStyle: "hidden",
         alwaysOnTop: true,
-        show: isMain ? true : this.transparent(),
+        show: isMain,
         x: position.x,
         y: position.y,
         width: this.width(),
