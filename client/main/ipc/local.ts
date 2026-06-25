@@ -41,7 +41,6 @@ export default class Local {
 
   private shouldWriteCoreLogLine(line: string) {
     const lineLevel = this.coreLogLineLevel(line);
-    console.log(lineLevel);
     if (!lineLevel) {
       return false;
     }
